@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/checkbox_checked.png</file>
+        <file>images/checkbox_checked_hover.png</file>
+        <file>images/checkbox_checked_pressed.png</file>
+        <file>images/checkbox_humanity_checked.png</file>
+        <file>images/checkbox_humanity_checked_hover.png</file>
+        <file>images/checkbox_humanity_checked_pressed.png</file>
+        <file>images/checkbox_indeterminate.png</file>
+        <file>images/checkbox_indeterminate_hover.png</file>
+        <file>images/checkbox_indeterminate_pressed.png</file>
+        <file>images/checkbox_unchecked.png</file>
+        <file>images/checkbox_unchecked_hover.png</file>
+        <file>images/checkbox_unchecked_pressed.png</file>
+        <file>images/ankh.ico</file>
+        <file>images/drawer.png</file>
+        <file>images/Tremere.png</file>
+        <file>images/Ventrue.png</file>
+        <file>images/ClanBrujahTitleV5.png</file>
+        <file>images/Ventrue_transparent.png</file>
+        <file>images/Ventrue_transparent_small.png</file>
+    </qresource>
+</RCC>
