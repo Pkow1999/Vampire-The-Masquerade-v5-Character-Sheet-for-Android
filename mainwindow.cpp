@@ -7,22 +7,41 @@
 #include <QTimer>
 #include <QScrollBar>
 
+
+
+
+int MainWindow::counter = 0;
+int MainWindow::hunger = 0;
+int MainWindow::healthPool = 0;
+int MainWindow::willpowerPool = 0;
+int MainWindow::healthModifier = 0;
+int MainWindow::healthFromAttributes = 0;
+int MainWindow::willpowerModifier = 0;
+int MainWindow::willpowerFromAttributes = 0;
+int MainWindow::humanity = 0;
+QString MainWindow::backgroundImageUrl = "";
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
     ui->scrollAreaWidgetContents->deleteLater();
+
     attributesWindow = new Attributes(nullptr);
     attributesWindow->setObjectName("Attibutes");
     diceWindow = new DiceRoller(nullptr, attributesWindow->getAttributesList());
-    diceWindow->setObjectName("Dice Roller");\
+    diceWindow->setObjectName("Dice Roller");
     personalWindow = new PersonalData(nullptr);
+    indicatorsWindow = new Indicators();
+    indicatorsWindow->setObjectName("Indicators");
+    attributesWindow->setIndicatorsPointer(indicatorsWindow);
+
     widgetStack = new QStackedWidget;
     widgetStack->addWidget(attributesWindow);
     widgetStack->addWidget(diceWindow);
     widgetStack->addWidget(personalWindow);
+    widgetStack->addWidget(indicatorsWindow);
 
     widgetStack->setCurrentIndex(-1);
     ui->scrollArea->setWidget(widgetStack);
@@ -39,10 +58,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->listWidget->addItem("Attributes");
     ui->listWidget->addItem("Dice Roller");
     ui->listWidget->addItem("Personal Data");
+    ui->listWidget->addItem("Indicators");
     ui->listWidget->setCurrentItem(ui->listWidget->item(0));
     ui->listWidget->setVisible(false);
 
     ui->scrollArea->setVisible(true);
+
+//    connect(personalWindow->getClanLineEdit(), &QLineEdit::editingFinished, this, &MainWindow::changeBackground);
+
 
 //    qApp->setAttribute(Qt::AA_SynthesizeMouseForUnhandledTouchEvents);
     qApp->installEventFilter(this);
@@ -52,9 +75,21 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete widgetStack;
-    delete attributesWindow;
-    delete diceWindow;
+    //delete attributesWindow;
+    //delete diceWindow;
     delete ui;
+}
+
+void MainWindow::changeBackground(QString backgroundURL)
+{
+    QString styleSheet = "QStackedWidget{background-image: url("+ backgroundURL + ");background-position: center;background-repeat: no-repeat;}";
+    qDebug() << "Style Sheet: " << styleSheet;
+    ui->scrollArea->setStyleSheet(styleSheet);
+}
+
+void MainWindow::clearBackground()
+{
+    ui->scrollArea->setStyleSheet("");
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
@@ -185,19 +220,24 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
         if(current->text() == "Attributes")
         {
             widgetStack->setCurrentWidget(attributesWindow);
-            widgetStack->setMaximumHeight(ui->scrollArea->viewport()->maximumHeight());//SCROLLUJ ILE KURWA MOZESZ
+            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->maximumHeight());//SCROLLUJ ILE KURWA MOZESZ
 
         }
         else if(current->text() == "Dice Roller")
         {
             widgetStack->setCurrentWidget(diceWindow);
-            widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());//TRZEBA TO KURWA USTAWIC ZEBY NIE POJAWIAL SIE SCROLL
+            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());//TRZEBA TO KURWA USTAWIC ZEBY NIE POJAWIAL SIE SCROLL
         //czas ile na tym gownie skonczonym zmarnowalem? KURWA ZA DUZO JA PIERDOLE
         }
         else if(current->text() == "Personal Data")
         {
             widgetStack->setCurrentWidget(personalWindow);
-            widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());
+            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());
+        }
+        else if(current->text() == "Indicators")
+        {
+            widgetStack->setCurrentWidget(indicatorsWindow);
+            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());
         }
         ui->drawerButton->setText(current->text());
 
@@ -207,3 +247,19 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
         qDebug() <<"Widget Size: "<<widgetStack->currentWidget()->size();
     }
 }
+
+
+
+void MainWindow::on_clanSymbolToggler_toggled(bool checked)
+{
+    if(checked)
+    {
+        if(MainWindow::backgroundImageUrl != "")
+            changeBackground(MainWindow::backgroundImageUrl);
+    }
+    else
+    {
+        clearBackground();
+    }
+}
+

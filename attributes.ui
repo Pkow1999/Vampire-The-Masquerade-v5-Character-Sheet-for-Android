@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>859</height>
+    <height>645</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -30,9 +30,41 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
+    <widget class="QPushButton" name="lockButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>:/images/icons/unlock20x20.png</normaloff>:/images/icons/unlock20x20.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QVBoxLayout" name="PhysicalLayout">
      <property name="spacing">
-      <number>10</number>
+      <number>15</number>
      </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
@@ -47,7 +79,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>20</pointsize>
          <bold>true</bold>
         </font>
        </property>
@@ -74,7 +106,7 @@
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>16</pointsize>
            <bold>false</bold>
           </font>
          </property>
@@ -120,8 +152,8 @@ height: 15px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -154,8 +186,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -188,8 +220,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -222,8 +254,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -256,8 +288,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -287,7 +319,7 @@ height: 18px;
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>16</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -332,8 +364,8 @@ height: 15px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -372,8 +404,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -406,8 +438,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -440,8 +472,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -474,8 +506,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -505,7 +537,7 @@ height: 18px;
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>16</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -550,8 +582,8 @@ height: 15px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -584,8 +616,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -618,8 +650,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -652,8 +684,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -686,8 +718,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -710,7 +742,7 @@ height: 18px;
    <item>
     <layout class="QVBoxLayout" name="SocialLayout">
      <property name="spacing">
-      <number>10</number>
+      <number>15</number>
      </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
@@ -725,7 +757,7 @@ height: 18px;
        </property>
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>20</pointsize>
          <bold>true</bold>
         </font>
        </property>
@@ -749,7 +781,7 @@ height: 18px;
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>16</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -794,8 +826,8 @@ height: 15px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -828,8 +860,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -862,8 +894,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -896,8 +928,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -930,8 +962,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -961,7 +993,7 @@ height: 18px;
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>16</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -1006,8 +1038,8 @@ height: 15px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1040,8 +1072,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1074,8 +1106,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1108,8 +1140,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1142,8 +1174,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1173,7 +1205,7 @@ height: 18px;
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>16</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -1218,8 +1250,8 @@ height: 15px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1252,8 +1284,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1286,8 +1318,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1320,8 +1352,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1354,8 +1386,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1378,7 +1410,7 @@ height: 18px;
    <item>
     <layout class="QVBoxLayout" name="MentalLayout">
      <property name="spacing">
-      <number>10</number>
+      <number>15</number>
      </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
@@ -1393,7 +1425,7 @@ height: 18px;
        </property>
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>20</pointsize>
          <bold>true</bold>
         </font>
        </property>
@@ -1417,7 +1449,7 @@ height: 18px;
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>16</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -1462,8 +1494,8 @@ height: 15px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1496,8 +1528,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1530,8 +1562,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1564,8 +1596,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1598,8 +1630,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1629,7 +1661,7 @@ height: 18px;
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>16</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -1674,8 +1706,8 @@ height: 15px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1708,8 +1740,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1742,8 +1774,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1776,8 +1808,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1810,8 +1842,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1841,7 +1873,7 @@ height: 18px;
          </property>
          <property name="font">
           <font>
-           <pointsize>14</pointsize>
+           <pointsize>16</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -1886,8 +1918,8 @@ height: 15px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1920,8 +1952,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1954,8 +1986,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -1988,8 +2020,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -2022,8 +2054,8 @@ height: 18px;
            <property name="styleSheet">
             <string notr="true">QRadioButton::indicator{
 
-width: 18px;
-height: 18px;
+width: 20px;
+height: 20px;
 }</string>
            </property>
            <property name="text">
@@ -2044,237 +2076,12 @@ height: 18px;
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="IndicatorsLayout">
-     <property name="spacing">
-      <number>10</number>
-     </property>
-     <property name="sizeConstraint">
-      <enum>QLayout::SetMaximumSize</enum>
-     </property>
-     <item>
-      <widget class="QLabel" name="label_6">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Indicators</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="HealthParentLayout">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetMaximumSize</enum>
-       </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QSpinBox" name="healthModifier">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="focusPolicy">
-            <enum>Qt::ClickFocus</enum>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::RightToLeft</enum>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-           <property name="buttonSymbols">
-            <enum>QAbstractSpinBox::NoButtons</enum>
-           </property>
-           <property name="correctionMode">
-            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-           </property>
-           <property name="keyboardTracking">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Health</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="Health">
-         <property name="spacing">
-          <number>5</number>
-         </property>
-         <property name="sizeConstraint">
-          <enum>QLayout::SetDefaultConstraint</enum>
-         </property>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="WillpowerParentLayout">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
-       </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_26">
-         <property name="spacing">
-          <number>6</number>
-         </property>
-         <property name="sizeConstraint">
-          <enum>QLayout::SetDefaultConstraint</enum>
-         </property>
-         <item>
-          <widget class="QSpinBox" name="wpModifier">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="focusPolicy">
-            <enum>Qt::ClickFocus</enum>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::RightToLeft</enum>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-           <property name="buttonSymbols">
-            <enum>QAbstractSpinBox::NoButtons</enum>
-           </property>
-           <property name="correctionMode">
-            <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-           </property>
-           <property name="keyboardTracking">
-            <bool>false</bool>
-           </property>
-           <property name="minimum">
-            <number>0</number>
-           </property>
-           <property name="value">
-            <number>0</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Willpower</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="Willpower">
-         <property name="spacing">
-          <number>5</number>
-         </property>
-         <property name="sizeConstraint">
-          <enum>QLayout::SetDefaultConstraint</enum>
-         </property>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="HumanityParentLayout">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetMaximumSize</enum>
-       </property>
-       <item>
-        <widget class="QTextBrowser" name="humanityText">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::AdjustIgnored</enum>
-         </property>
-         <property name="acceptRichText">
-          <bool>true</bool>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::NoTextInteraction</set>
-         </property>
-         <property name="openLinks">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="Humanity">
-         <property name="spacing">
-          <number>5</number>
-         </property>
-         <property name="sizeConstraint">
-          <enum>QLayout::SetNoConstraint</enum>
-         </property>
-        </layout>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::Minimum</enum>
+      <enum>QSizePolicy::Expanding</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -2289,27 +2096,7 @@ height: 18px;
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="Intelligence">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="AttributesGroup">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Stamina">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
   <buttongroup name="Manipulation">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Charisma">
    <property name="exclusive">
     <bool>false</bool>
    </property>
@@ -2319,7 +2106,7 @@ height: 18px;
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="Composure">
+  <buttongroup name="Intelligence">
    <property name="exclusive">
     <bool>false</bool>
    </property>
@@ -2329,12 +2116,32 @@ height: 18px;
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="Wits">
+  <buttongroup name="Composure">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
   <buttongroup name="Dexterity">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Wits">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Stamina">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="AttributesGroup">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Charisma">
    <property name="exclusive">
     <bool>false</bool>
    </property>

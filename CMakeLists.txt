@@ -27,6 +27,9 @@ set(PROJECT_SOURCES
         personaldata.cpp
         personaldata.ui
         resources.qrc
+        indicators.h
+        indicators.cpp
+        indicators.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

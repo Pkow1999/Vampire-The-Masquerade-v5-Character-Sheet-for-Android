@@ -1,6 +1,7 @@
 #include "personaldata.h"
 #include "QScreen"
 #include "ui_personaldata.h"
+#include "mainwindow.h"
 
 PersonalData::PersonalData(QWidget *parent) :
     QWidget(parent),
@@ -8,9 +9,17 @@ PersonalData::PersonalData(QWidget *parent) :
 {
     ui->setupUi(this);
     connectAllLineEdits();
+
+    listOfClans = {"banu haqim", "brujah", "gangrel", "hecata", "lasombra", "malkavian", "ministry", "nosferatu", "ravnos", "toreador", "tremere", "tzimisce", "ventrue"};
 }
 
-void PersonalData::connectAllLineEdits(){
+QLineEdit* PersonalData::getClanLineEdit()
+{
+    return ui->lineEdit;
+}
+
+void PersonalData::connectAllLineEdits()
+{
     connect(ui->lineEdit,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
     connect(ui->lineEdit_2,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
     connect(ui->lineEdit_3,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
@@ -22,8 +31,9 @@ void PersonalData::connectAllLineEdits(){
     connect(ui->spinBox,&QAbstractSpinBox::editingFinished, this, &PersonalData::spinBoxHandling);
     connect(ui->spinBox_2,&QAbstractSpinBox::editingFinished, this, &PersonalData::spinBoxHandling);
 
-}
+    connect(ui->lineEdit_4,&QLineEdit::editingFinished, this, &PersonalData::clanHandle);
 
+}
 PersonalData::~PersonalData()
 {
     delete ui;
@@ -39,4 +49,25 @@ void PersonalData::spinBoxHandling()
 {
     QSpinBox *spin = static_cast<QSpinBox *>(sender());
     spin->clearFocus();
+}
+
+void PersonalData::clanHandle()
+{
+    QString lowerText = ui->lineEdit_4->text().toLower();
+    QString url = "";
+    for(const auto &clan : listOfClans)
+    {
+        if(lowerText.contains(clan))
+        {
+            url = clan+"_background_transparent.png";
+            break;
+        }
+    }
+    if(url == ""){
+        MainWindow::backgroundImageUrl = "";
+        return;
+    }
+    qDebug() <<"URL: "<< url;
+    MainWindow::backgroundImageUrl = ":/images/background-image/"+url;
+    qDebug() << "BACKGROUND IMAGE URL: " << MainWindow::backgroundImageUrl;
 }

@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QStyleOption>
 #include <QWidget>
+#include "indicators.h"
 
 namespace Ui {
 class Attributes;
@@ -16,8 +17,9 @@ class Attributes : public QWidget
     Q_OBJECT
 
 public:
-    explicit Attributes(QWidget *parent = nullptr);
+    explicit Attributes(QWidget *parent = nullptr, Indicators *anotherWindowPointer = nullptr);
     QStringList getAttributesList();
+    void setIndicatorsPointer(Indicators *ind);
     ~Attributes();
 
 private slots:
@@ -25,23 +27,18 @@ private slots:
     void calculateHealth();
     void calculateWP();
     void bolding(QAbstractButton *bt, bool state);
-    void humanityChanged();
+    void on_lockButton_toggled(bool checked);
 
 private:
     int counter = 0;
     int hunger = 0;
-    int healthPool = 0;
-    int willpowerPool = 0;
     QRect geometryStack;
     Ui::Attributes *ui;
+    Indicators *indicatorsPointer;
     int countDots(QButtonGroup *grp);
-    void deleteHealth(int size_);
-    void deleteWP(int size_);
     QLayout *findParentLayout(QWidget *w, QLayout *topLevelLayout);
     QLayout *findParentLayout(QWidget *w);
     void connectAllButtonGroup();
-    QPair<int, int> countIndicators(QLayout *layout, int size_);
-    void humanityGenerator();
     void paintEvent(QPaintEvent *)
     {
         QStyleOption opt;

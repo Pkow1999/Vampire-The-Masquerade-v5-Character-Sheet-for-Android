@@ -1,23 +1,71 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/checkbox_checked.png</file>
-        <file>images/checkbox_checked_hover.png</file>
-        <file>images/checkbox_checked_pressed.png</file>
-        <file>images/checkbox_humanity_checked.png</file>
-        <file>images/checkbox_humanity_checked_hover.png</file>
-        <file>images/checkbox_humanity_checked_pressed.png</file>
-        <file>images/checkbox_indeterminate.png</file>
-        <file>images/checkbox_indeterminate_hover.png</file>
-        <file>images/checkbox_indeterminate_pressed.png</file>
-        <file>images/checkbox_unchecked.png</file>
-        <file>images/checkbox_unchecked_hover.png</file>
-        <file>images/checkbox_unchecked_pressed.png</file>
-        <file>images/ankh.ico</file>
-        <file>images/drawer.png</file>
         <file>images/Tremere.png</file>
         <file>images/Ventrue.png</file>
-        <file>images/ClanBrujahTitleV5.png</file>
         <file>images/Ventrue_transparent.png</file>
-        <file>images/Ventrue_transparent_small.png</file>
+        <file>images/Nosferatu_transparent_small.png</file>
+        <file>images/icons/Vampire5thAnkhSMOL.png</file>
+        <file>images/checkbox/checkbox_checked.png</file>
+        <file>images/checkbox/checkbox_checked_hover.png</file>
+        <file>images/checkbox/checkbox_checked_pressed.png</file>
+        <file>images/checkbox/checkbox_humanity_checked.png</file>
+        <file>images/checkbox/checkbox_humanity_checked_hover.png</file>
+        <file>images/checkbox/checkbox_humanity_checked_pressed.png</file>
+        <file>images/checkbox/checkbox_indeterminate.png</file>
+        <file>images/checkbox/checkbox_indeterminate_hover.png</file>
+        <file>images/checkbox/checkbox_indeterminate_pressed.png</file>
+        <file>images/checkbox/checkbox_unchecked.png</file>
+        <file>images/checkbox/checkbox_unchecked_hover.png</file>
+        <file>images/checkbox/checkbox_unchecked_pressed.png</file>
+        <file>images/dice-values/bestial-fail.png</file>
+        <file>images/dice-values/normal-crit.png</file>
+        <file>images/dice-values/normal-fail.png</file>
+        <file>images/dice-values/normal-success.png</file>
+        <file>images/dice-values/red-crit.png</file>
+        <file>images/dice-values/red-fail.png</file>
+        <file>images/dice-values/red-success.png</file>
+        <file>images/icons/drawer.png</file>
+        <file>images/icons/Vampire5thAnkh.png</file>
+        <file>images/checkbox/Doubled/checkbox_checked.png</file>
+        <file>images/checkbox/Doubled/checkbox_checked_hover.png</file>
+        <file>images/checkbox/Doubled/checkbox_checked_pressed.png</file>
+        <file>images/checkbox/Doubled/checkbox_humanity_checked.png</file>
+        <file>images/checkbox/Doubled/checkbox_humanity_checked_hover.png</file>
+        <file>images/checkbox/Doubled/checkbox_humanity_checked_pressed.png</file>
+        <file>images/checkbox/Doubled/checkbox_indeterminate.png</file>
+        <file>images/checkbox/Doubled/checkbox_indeterminate_hover.png</file>
+        <file>images/checkbox/Doubled/checkbox_indeterminate_pressed.png</file>
+        <file>images/checkbox/Doubled/checkbox_unchecked.png</file>
+        <file>images/checkbox/Doubled/checkbox_unchecked_hover.png</file>
+        <file>images/checkbox/Doubled/checkbox_unchecked_pressed.png</file>
+        <file>images/checkbox/20x20/checkbox_checked.png</file>
+        <file>images/checkbox/20x20/checkbox_checked_hover.png</file>
+        <file>images/checkbox/20x20/checkbox_checked_pressed.png</file>
+        <file>images/checkbox/20x20/checkbox_humanity_checked.png</file>
+        <file>images/checkbox/20x20/checkbox_humanity_checked_hover.png</file>
+        <file>images/checkbox/20x20/checkbox_humanity_checked_pressed.png</file>
+        <file>images/checkbox/20x20/checkbox_indeterminate.png</file>
+        <file>images/checkbox/20x20/checkbox_indeterminate_hover.png</file>
+        <file>images/checkbox/20x20/checkbox_indeterminate_pressed.png</file>
+        <file>images/checkbox/20x20/checkbox_unchecked.png</file>
+        <file>images/checkbox/20x20/checkbox_unchecked_hover.png</file>
+        <file>images/checkbox/20x20/checkbox_unchecked_pressed.png</file>
+        <file>images/background-image/ventrue_background_transparent.png</file>
+        <file>images/background-image/banu haqim_background_transparent.png</file>
+        <file>images/background-image/brujah_background_transparent.png</file>
+        <file>images/background-image/gangrel_background_transparent.png</file>
+        <file>images/background-image/hecata_background_transparent.png</file>
+        <file>images/background-image/lasombra_background_transparent.png</file>
+        <file>images/background-image/malkavian_background_transparent.png</file>
+        <file>images/background-image/ministry_background_transparent.png</file>
+        <file>images/background-image/nosferatu_background_transparent.png</file>
+        <file>images/background-image/ravnos_background_transparent.png</file>
+        <file>images/background-image/toreador_background_transparent.png</file>
+        <file>images/background-image/tremere_background_transparent.png</file>
+        <file>images/background-image/tzimisce_background_transparent.png</file>
+        <file>images/icons/back.png</file>
+        <file>images/icons/menu.png</file>
+        <file>images/icons/lock20x20.png</file>
+        <file>images/icons/unlock20x20.png</file>
     </qresource>
 </RCC>

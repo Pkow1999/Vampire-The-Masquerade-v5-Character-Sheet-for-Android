@@ -17,13 +17,17 @@ class PersonalData : public QWidget
 
 public:
     explicit PersonalData(QWidget *parent = nullptr);
+    QLineEdit* getClanLineEdit();
     ~PersonalData();
 
 private slots:
     void lineEditHandling();
     void spinBoxHandling();
+    void clanHandle();
 private:
     Ui::PersonalData *ui;
+    QList<QString> listOfClans;
+
     void connectAllLineEdits();
     void paintEvent(QPaintEvent *)
     {
