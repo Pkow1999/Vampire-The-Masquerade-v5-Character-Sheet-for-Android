@@ -33,6 +33,12 @@ set(PROJECT_SOURCES
         disciplines.h
         disciplines.cpp
         disciplines.ui
+        loresheets.h
+        loresheets.cpp
+        loresheets.ui
+        skills.h
+        skills.cpp
+        skills.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

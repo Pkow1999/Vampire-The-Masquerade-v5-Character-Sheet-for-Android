@@ -27,6 +27,9 @@ void PersonalData::connectAllLineEdits()
     connect(ui->lineEdit_5,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
     connect(ui->lineEdit_6,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
     connect(ui->lineEdit_7,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
+    connect(ui->lineEdit_8,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
+    connect(ui->lineEdit_9,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
+    connect(ui->lineEdit_10,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
 
     connect(ui->spinBox,&QAbstractSpinBox::editingFinished, this, &PersonalData::spinBoxHandling);
     connect(ui->spinBox_2,&QAbstractSpinBox::editingFinished, this, &PersonalData::spinBoxHandling);

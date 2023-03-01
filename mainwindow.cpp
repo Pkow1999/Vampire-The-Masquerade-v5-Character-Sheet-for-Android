@@ -30,10 +30,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     generatePages();
 
-    widgetStack->setCurrentIndex(-1);
     ui->scrollArea->setWidget(widgetStack);
     ui->scrollArea->setSizeAdjustPolicy(QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents);
     ui->gridLayout->addWidget(ui->drawerButton,0,1,Qt::AlignLeft);
+    widgetStack->setMaximumHeight(ui->scrollArea->viewport()->maximumHeight());//making scrollable possible
+    widgetStack->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     auto screenSize = qApp->screens().first()->size();
     ui->centralwidget->setMaximumSize(screenSize);
@@ -209,6 +210,16 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
             if(widgetStack->widget(i)->objectName() == current->text())
             {
                 widgetStack->setCurrentWidget(widgetStack->widget(i));
+                qDebug() << "~~~~~~WIDGET STACK SIZE POLICY~~~~~~~~";
+                qDebug() << widgetStack->sizePolicy();
+                if(widgetStack->widget(i)->objectName() ==  "Disciplines" || widgetStack->widget(i)->objectName() ==  "Loresheets")
+                {
+                    widgetStack->setMaximumHeight(ui->scrollArea->viewport()->maximumHeight());//making scrollable possible
+                }
+                else
+                {
+                    widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());//making no scrollable
+                }
                 ui->drawerButton->setText(current->text());
                 return;
             }
@@ -262,21 +273,38 @@ void MainWindow::on_clanSymbolToggler_toggled(bool checked)
 
 void MainWindow::generatePages()
 {
-    attributesWindow = new Attributes(nullptr);
+    QList<QString> physicalSkills = {"Athletics", "Brawl", "Craft", "Drive", "Firearms", "Larceny", "Melee", "Stealth", "Survival"};
+    QList<QString> socialSkills = {"Animal Ken", "Etiquette", "Insight", "Intimidation", "Leadership", "Performance", "Persuasion", "Streetwise", "Subterfuge"};
+    QList<QString> mentalSkills = {"Academics", "Finance", "Investigation", "Medicine", "Occult", "Politics", "Science", "Technology"};
+
+
+    attributesWindow = new Attributes(this);
     attributesWindow->setObjectName("Attributes");
 
-    diceWindow = new DiceRoller(nullptr, attributesWindow->getAttributesList());
+    diceWindow = new DiceRoller(this, attributesWindow->getAttributesList());
     diceWindow->setObjectName("Dice Roller");
 
-    personalWindow = new PersonalData(nullptr);
+    personalWindow = new PersonalData(this);
     personalWindow->setObjectName("Personal Data");
 
-    indicatorsWindow = new Indicators();
+    indicatorsWindow = new Indicators(this);
     indicatorsWindow->setObjectName("Indicators");
     attributesWindow->setIndicatorsPointer(indicatorsWindow);
 
-    disciplineWindow = new Disciplines(nullptr);
+    disciplineWindow = new Disciplines(this);
     disciplineWindow->setObjectName("Disciplines");
+
+    loresheetsWindow = new Loresheets(this);
+    loresheetsWindow->setObjectName("Loresheets");
+
+    physicalSkillsWindow = new Skills(this, physicalSkills);
+    physicalSkillsWindow->setObjectName("Physical Skills");
+
+    socialSkillsWindow = new Skills(this, socialSkills);
+    socialSkillsWindow->setObjectName("Social Skills");
+
+    mentalSkillsWindow = new Skills(this, mentalSkills);
+    mentalSkillsWindow->setObjectName("Mental Skills");
 
     widgetStack = new QStackedWidget;
     widgetStack->addWidget(attributesWindow);
@@ -284,7 +312,10 @@ void MainWindow::generatePages()
     widgetStack->addWidget(personalWindow);
     widgetStack->addWidget(indicatorsWindow);
     widgetStack->addWidget(disciplineWindow);
-
+    widgetStack->addWidget(loresheetsWindow);
+    widgetStack->addWidget(physicalSkillsWindow);
+    widgetStack->addWidget(socialSkillsWindow);
+    widgetStack->addWidget(mentalSkillsWindow);
 
     for(int i = 0; i < widgetStack->count(); ++i)
     {

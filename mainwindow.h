@@ -12,6 +12,8 @@
 #include "indicators.h"
 #include "personaldata.h"
 #include "disciplines.h"
+#include "loresheets.h"
+#include "skills.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -51,6 +53,10 @@ private:
     PersonalData *personalWindow;
     Indicators *indicatorsWindow;
     Disciplines *disciplineWindow;
+    Loresheets *loresheetsWindow;
+    Skills *physicalSkillsWindow;
+    Skills *socialSkillsWindow;
+    Skills *mentalSkillsWindow;
     QStackedWidget *widgetStack;
 
     void generatePages();

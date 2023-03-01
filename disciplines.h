@@ -19,10 +19,17 @@ public:
 private slots:
     void dynamicRemoveDots(QAbstractButton *bt);
     void dynamicPowersCreation(QAbstractButton *bt);
-    void dynamicDysciplinesCreation(QAbstractButton *bt);
+    void on_addNewWidgetButton_clicked();
+
+    void on_deleteWidgetButton_clicked();
+
+    void on_lockButton_toggled(bool checked);
+
+    void lineEditHandling();
 private:
     Ui::Disciplines *ui;
     QWidget* createDysciplineWidget();
+    QList<QWidget *> listOfDysciplines;
 };
 
 #endif // DISCIPLINES_H

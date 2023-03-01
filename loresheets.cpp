@@ -1,0 +1,204 @@
+#include "loresheets.h"
+#include "ui_loresheets.h"
+
+
+#include <QAbstractButton>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QButtonGroup>
+
+Loresheets::Loresheets(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::Loresheets)
+{
+    ui->setupUi(this);
+
+    connect(ui->loresheetsButtonGroup, &QButtonGroup::buttonClicked, this, &Loresheets::dynamicRemoveDots);
+
+    connect(ui->loresheetLine, &QLineEdit::editingFinished, this, &Loresheets::lineEditHandling);
+}
+
+Loresheets::~Loresheets()
+{
+    for(auto wid: listOfLoresheets)
+        wid->deleteLater();
+    delete ui;
+}
+
+
+
+
+QWidget *Loresheets::createLoreSheetWidget()
+{
+    QWidget *mainWidget = new QWidget;
+    QVBoxLayout *mainLayout = new QVBoxLayout(mainWidget);
+    mainLayout->setSizeConstraint(ui->Loresheet1->layout()->sizeConstraint());
+    mainLayout->setAlignment(ui->Loresheet1->layout()->alignment());
+    mainLayout->setSpacing(ui->Loresheet1->layout()->spacing());
+    QHBoxLayout *horizontalLayout = new QHBoxLayout();
+    horizontalLayout->setSizeConstraint(ui->LoresheetDetails1->sizeConstraint());
+    horizontalLayout->setAlignment(ui->LoresheetDetails1->alignment());
+    horizontalLayout->setSpacing(ui->LoresheetDetails1->spacing());
+    QLineEdit *lineEdit = new QLineEdit(mainWidget);
+    lineEdit->setSizePolicy(ui->loresheetLine->sizePolicy());
+    lineEdit->setFont(ui->loresheetLine->font());
+    lineEdit->adjustSize();
+    horizontalLayout->addWidget(lineEdit);
+
+    QHBoxLayout *buttonsLayout = new QHBoxLayout();
+    buttonsLayout->setSizeConstraint(ui->LoresheetButtonsLayout_1->sizeConstraint());
+    buttonsLayout->setAlignment(ui->LoresheetButtonsLayout_1->alignment());
+    buttonsLayout->setSpacing(ui->LoresheetButtonsLayout_1->spacing());
+    QButtonGroup *groupBut = new QButtonGroup();
+    groupBut->setExclusive(false);
+    for(int i = 0; i < 5; ++i)
+    {
+        QRadioButton *but = new QRadioButton(mainWidget);
+        but->setObjectName("Loresheet_"+ QString::number(listOfLoresheets.count())+"_Button" + QString::number(i));
+        but->setSizePolicy(ui->loresheetButton->sizePolicy());
+        but->setStyleSheet(ui->loresheetButton->styleSheet());
+        but->setAutoExclusive(false);
+        buttonsLayout->insertWidget(i, but);
+        groupBut->addButton(but,i);
+        but->adjustSize();
+    }
+    horizontalLayout->addLayout(buttonsLayout);
+
+    QTextEdit *text = new QTextEdit(mainWidget);
+    text->setSizePolicy(ui->textEdit->sizePolicy());
+    text->setFont(ui->textEdit->font());
+    text->setMinimumSize(ui->textEdit->minimumSize());
+    text->setMaximumSize(ui->textEdit->maximumSize());
+    text->adjustSize();
+
+    mainLayout->addLayout(horizontalLayout);
+    mainLayout->addWidget(text);
+
+    connect(groupBut, &QButtonGroup::buttonClicked, this, &Loresheets::dynamicRemoveDots);
+    connect(lineEdit, &QLineEdit::editingFinished, this, &Loresheets::lineEditHandling);
+
+    mainWidget->adjustSize();
+    return mainWidget;
+}
+
+void Loresheets::dynamicRemoveDots(QAbstractButton *bt)//naprawienie sposobem tasmy klejacej
+{
+    if(bt->group()->id(bt) < -1)//znaczy ze automatycznie przydzielone
+    {
+        if(bt->isChecked())
+        {
+            for(int i = 0; i < bt->group()->buttons().size(); i++)
+            {
+                if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
+                    break;
+                bt->group()->buttons().at(i)->setChecked(true);
+            }
+        }
+        else
+        {
+            int del = 0;
+            for(int i = 0; i < bt->group()->buttons().size(); i++)
+            {
+                if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
+                {
+                    del = i;
+                    break;
+                }
+            }
+            for(int i = del; i < bt->group()->buttons().size(); i++)
+            {
+                bt->group()->buttons().at(i)->setChecked(false);
+            }
+        }
+    }
+    else if(bt->group()->id(bt) == -1)
+    {
+        qDebug() << "COS POSZLO NIE TAK";
+        return;
+    }
+    else//recznie przydzielione
+    {
+        qDebug() << "RECZNIE";
+        if(bt->isChecked())
+        {
+            for(int i = 0; i < bt->group()->buttons().size(); i++)
+            {
+                if(bt->group()->button(i)->objectName() == bt->objectName())
+                    break;
+                bt->group()->button(i)->setChecked(true);
+            }
+        }
+        else
+        {
+            int del = 0;
+            for(int i = 0; i < bt->group()->buttons().size(); i++)
+            {
+                if(bt->group()->button(i)->objectName() == bt->objectName())
+                {
+                    del = i;
+                    break;
+                }
+            }
+            for(int i = del; i < bt->group()->buttons().size(); i++)
+            {
+                bt->group()->button(i)->setChecked(false);
+            }
+        }
+    }
+}
+
+
+void Loresheets::on_addNewWidgetButton_clicked()
+{
+    QWidget *newLoresheet = createLoreSheetWidget();
+    listOfLoresheets.append(newLoresheet);
+    QVBoxLayout *layout = static_cast<QVBoxLayout *>(this->layout());
+    layout->insertWidget(layout->count() - 2, newLoresheet);
+}
+
+
+void Loresheets::on_deleteWidgetButton_clicked()
+{
+    if(!listOfLoresheets.isEmpty())
+    {
+        listOfLoresheets.back()->deleteLater();
+        listOfLoresheets.pop_back();
+    }
+}
+
+
+void Loresheets::on_lockButton_toggled(bool checked)
+{
+    if(checked)
+    {
+        ui->lockButton->setIcon(QIcon(QPixmap(":/images/icons/lock20x20.png")));
+    }
+    else
+    {
+        ui->lockButton->setIcon(QIcon(QPixmap(":/images/icons/unlock20x20.png")));
+    }
+
+    QList<QRadioButton *> allRadioButtons = this->findChildren<QRadioButton *>();
+    for(auto but: allRadioButtons)
+    {
+        but->setEnabled(!checked);
+    }
+    QList<QLineEdit *> allLineEdits = this->findChildren<QLineEdit *>();
+    for(auto line: allLineEdits)
+    {
+        line->setEnabled(!checked);
+    }
+    QList<QTextEdit *> allTextEdits = this->findChildren<QTextEdit *>();
+    for(auto text: allTextEdits)
+    {
+        text->setEnabled(!checked);
+    }
+    ui->addNewWidgetButton->setEnabled(!checked);
+    ui->deleteWidgetButton->setEnabled(!checked);
+}
+
+void Loresheets::lineEditHandling()
+{
+    QLineEdit *line = static_cast<QLineEdit *>(sender());
+    line->clearFocus();
+}
