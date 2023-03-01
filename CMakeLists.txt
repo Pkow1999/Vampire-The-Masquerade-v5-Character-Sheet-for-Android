@@ -30,6 +30,9 @@ set(PROJECT_SOURCES
         indicators.h
         indicators.cpp
         indicators.ui
+        disciplines.h
+        disciplines.cpp
+        disciplines.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

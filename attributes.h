@@ -35,7 +35,6 @@ private:
     QRect geometryStack;
     Ui::Attributes *ui;
     Indicators *indicatorsPointer;
-    int countDots(QButtonGroup *grp);
     QLayout *findParentLayout(QWidget *w, QLayout *topLevelLayout);
     QLayout *findParentLayout(QWidget *w);
     void connectAllButtonGroup();

@@ -28,20 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->scrollAreaWidgetContents->deleteLater();
 
-    attributesWindow = new Attributes(nullptr);
-    attributesWindow->setObjectName("Attibutes");
-    diceWindow = new DiceRoller(nullptr, attributesWindow->getAttributesList());
-    diceWindow->setObjectName("Dice Roller");
-    personalWindow = new PersonalData(nullptr);
-    indicatorsWindow = new Indicators();
-    indicatorsWindow->setObjectName("Indicators");
-    attributesWindow->setIndicatorsPointer(indicatorsWindow);
-
-    widgetStack = new QStackedWidget;
-    widgetStack->addWidget(attributesWindow);
-    widgetStack->addWidget(diceWindow);
-    widgetStack->addWidget(personalWindow);
-    widgetStack->addWidget(indicatorsWindow);
+    generatePages();
 
     widgetStack->setCurrentIndex(-1);
     ui->scrollArea->setWidget(widgetStack);
@@ -55,10 +42,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     QScroller::grabGesture(ui->scrollArea->viewport(), QScroller::LeftMouseButtonGesture);
 
-    ui->listWidget->addItem("Attributes");
-    ui->listWidget->addItem("Dice Roller");
-    ui->listWidget->addItem("Personal Data");
-    ui->listWidget->addItem("Indicators");
     ui->listWidget->setCurrentItem(ui->listWidget->item(0));
     ui->listWidget->setVisible(false);
 
@@ -75,8 +58,11 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete widgetStack;
-    //delete attributesWindow;
-    //delete diceWindow;
+    delete attributesWindow;
+    delete diceWindow;
+    delete indicatorsWindow;
+    delete personalWindow;
+    delete disciplineWindow;
     delete ui;
 }
 
@@ -208,6 +194,8 @@ void MainWindow::on_drawerButton_toggled(bool checked)
 
 }
 
+
+
 void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     if(!ui->scrollArea->isVisible())
@@ -216,35 +204,44 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
     {
 
         ui->scrollArea->verticalScrollBar()->setValue(0);//resetujemy wartosc scrollbara
+        for(int i = 0; i < widgetStack->count(); ++i)
+        {
+            if(widgetStack->widget(i)->objectName() == current->text())
+            {
+                widgetStack->setCurrentWidget(widgetStack->widget(i));
+                ui->drawerButton->setText(current->text());
+                return;
+            }
+        }
 
-        if(current->text() == "Attributes")
-        {
-            widgetStack->setCurrentWidget(attributesWindow);
-            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->maximumHeight());//SCROLLUJ ILE KURWA MOZESZ
+//        if(current->text() == "Attributes")
+//        {
+//            widgetStack->setCurrentWidget(attributesWindow);
+//            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->maximumHeight());//SCROLLUJ ILE KURWA MOZESZ
 
-        }
-        else if(current->text() == "Dice Roller")
-        {
-            widgetStack->setCurrentWidget(diceWindow);
-            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());//TRZEBA TO KURWA USTAWIC ZEBY NIE POJAWIAL SIE SCROLL
-        //czas ile na tym gownie skonczonym zmarnowalem? KURWA ZA DUZO JA PIERDOLE
-        }
-        else if(current->text() == "Personal Data")
-        {
-            widgetStack->setCurrentWidget(personalWindow);
-            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());
-        }
-        else if(current->text() == "Indicators")
-        {
-            widgetStack->setCurrentWidget(indicatorsWindow);
-            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());
-        }
-        ui->drawerButton->setText(current->text());
+//        }
+//        else if(current->text() == "Dice Roller")
+//        {
+//            widgetStack->setCurrentWidget(diceWindow);
+//            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());//TRZEBA TO KURWA USTAWIC ZEBY NIE POJAWIAL SIE SCROLL
+//        //czas ile na tym gownie skonczonym zmarnowalem? KURWA ZA DUZO JA PIERDOLE
+//        }
+//        else if(current->text() == "Personal Data")
+//        {
+//            widgetStack->setCurrentWidget(personalWindow);
+//            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());
+//        }
+//        else if(current->text() == "Indicators")
+//        {
+//            widgetStack->setCurrentWidget(indicatorsWindow);
+//            //widgetStack->setMaximumHeight(ui->scrollArea->viewport()->height());
+//        }
+//        ui->drawerButton->setText(current->text());
 
-        qDebug() <<"ScrollArea Size: "<<ui->scrollArea->size();
-        qDebug() <<"Viewport Size: " <<ui->scrollArea->viewport()->size();
-        qDebug() <<"StackedWidget Size: "<<widgetStack->size();
-        qDebug() <<"Widget Size: "<<widgetStack->currentWidget()->size();
+//        qDebug() <<"ScrollArea Size: "<<ui->scrollArea->size();
+//        qDebug() <<"Viewport Size: " <<ui->scrollArea->viewport()->size();
+//        qDebug() <<"StackedWidget Size: "<<widgetStack->size();
+//        qDebug() <<"Widget Size: "<<widgetStack->currentWidget()->size();
     }
 }
 
@@ -263,3 +260,58 @@ void MainWindow::on_clanSymbolToggler_toggled(bool checked)
     }
 }
 
+void MainWindow::generatePages()
+{
+    attributesWindow = new Attributes(nullptr);
+    attributesWindow->setObjectName("Attributes");
+
+    diceWindow = new DiceRoller(nullptr, attributesWindow->getAttributesList());
+    diceWindow->setObjectName("Dice Roller");
+
+    personalWindow = new PersonalData(nullptr);
+    personalWindow->setObjectName("Personal Data");
+
+    indicatorsWindow = new Indicators();
+    indicatorsWindow->setObjectName("Indicators");
+    attributesWindow->setIndicatorsPointer(indicatorsWindow);
+
+    disciplineWindow = new Disciplines(nullptr);
+    disciplineWindow->setObjectName("Disciplines");
+
+    widgetStack = new QStackedWidget;
+    widgetStack->addWidget(attributesWindow);
+    widgetStack->addWidget(diceWindow);
+    widgetStack->addWidget(personalWindow);
+    widgetStack->addWidget(indicatorsWindow);
+    widgetStack->addWidget(disciplineWindow);
+
+
+    for(int i = 0; i < widgetStack->count(); ++i)
+    {
+        QString name = widgetStack->widget(i)->objectName();
+        ui->listWidget->addItem(name);
+    }
+//    ui->listWidget->addItem("Attributes");
+//    ui->listWidget->addItem("Dice Roller");
+//    ui->listWidget->addItem("Personal Data");
+//    ui->listWidget->addItem("Indicators");
+    ui->listWidget->setCurrentItem(ui->listWidget->item(0));
+
+}
+
+int MainWindow::countDots(QButtonGroup *grp)
+{
+    int counter = 0;
+    for(int i = 0; i < grp->buttons().size(); i++)
+    {
+        if(grp->buttons().at(i)->isChecked())
+        {
+            counter++;
+        }
+        else
+        {
+            break;
+        }
+    }
+    return counter;
+}

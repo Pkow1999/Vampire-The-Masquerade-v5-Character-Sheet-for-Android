@@ -34,7 +34,7 @@ void Indicators::createWillpower()
 
     for(int i = 0; i < MainWindow::willpowerPool; i++)
     {
-        QCheckBox *dynCheck = new QCheckBox();
+        QCheckBox *dynCheck = new QCheckBox(this);
         dynCheck->setCheckable(true);
         dynCheck->setTristate(true);
         QString checkBoxStyle("QCheckBox::indicator::unchecked {background-image : url(:/images/checkbox/20x20/checkbox_unchecked.png); }"
@@ -71,7 +71,7 @@ void Indicators::createHealth()
 
     for(int i = 0; i < MainWindow::healthPool; i++)
     {
-        QCheckBox *dynCheck = new QCheckBox();
+        QCheckBox *dynCheck = new QCheckBox(this);
         dynCheck->setCheckable(true);
         dynCheck->setTristate(true);
         QString checkBoxStyle("QCheckBox::indicator::unchecked {background-image : url(:/images/checkbox/20x20/checkbox_unchecked.png); }"
@@ -189,7 +189,7 @@ void Indicators::humanityGenerator()
 {
     for(int i = 0; i < 10; i++)
     {
-        QCheckBox *dynCheck = new QCheckBox();
+        QCheckBox *dynCheck = new QCheckBox(this);
         dynCheck->setCheckable(true);
         dynCheck->setTristate(true);
         QString checkBoxStyle("QCheckBox::indicator::unchecked {background-image : url(:/images/checkbox/20x20/checkbox_unchecked.png); }"

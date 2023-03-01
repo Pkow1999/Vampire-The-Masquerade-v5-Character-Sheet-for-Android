@@ -11,6 +11,7 @@
 #include "diceroller.h"
 #include "indicators.h"
 #include "personaldata.h"
+#include "disciplines.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,11 +37,11 @@ public:
 
     ~MainWindow();
 
+    static int countDots(QButtonGroup *grp);
 private slots:
     void on_drawerButton_toggled(bool checked);
     void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
     void on_clanSymbolToggler_toggled(bool checked);
-
 private:
     QTouchEvent *touchBegin = nullptr;
     QTouchEvent *touchEnd = nullptr;
@@ -49,11 +50,13 @@ private:
     DiceRoller *diceWindow;
     PersonalData *personalWindow;
     Indicators *indicatorsWindow;
+    Disciplines *disciplineWindow;
     QStackedWidget *widgetStack;
 
-    QRect geometryStack;
+    void generatePages();
     bool eventFilter(QObject *obj, QEvent *event);
     bool swipeAction(QTouchEvent *begin, QTouchEvent *end);
+
 
     bool swipeRight();
     bool swipeLeft();

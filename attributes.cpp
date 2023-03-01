@@ -135,31 +135,14 @@ void Attributes::dynamicRemoveDots(QAbstractButton *bt)
         Attributes::setWindowTitle(Attributes::windowTitle() + "*");
 }
 
-int Attributes::countDots(QButtonGroup *grp)
-{
-    int counter = 0;
-    for(int i = 0; i < grp->buttons().size(); i++)
-    {
-        if(grp->buttons().at(i)->isChecked())
-        {
-            counter++;
-        }
-        else
-        {
-            break;
-        }
-    }
-    return counter;
-}
-
 void Attributes::calculateHealth()
 {
-    MainWindow::healthFromAttributes = countDots(ui->Stamina) + 3;
+    MainWindow::healthFromAttributes = MainWindow::countDots(ui->Stamina) + 3;
 }
 
 void Attributes::calculateWP()
 {
-    MainWindow::willpowerFromAttributes = countDots(ui->Composure) + countDots(ui->Resolve);
+    MainWindow::willpowerFromAttributes = MainWindow::countDots(ui->Composure) + MainWindow::countDots(ui->Resolve);
 
 }
 
