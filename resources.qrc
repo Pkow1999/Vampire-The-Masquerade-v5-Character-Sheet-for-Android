@@ -1,9 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/Tremere.png</file>
-        <file>images/Ventrue.png</file>
-        <file>images/Ventrue_transparent.png</file>
-        <file>images/Nosferatu_transparent_small.png</file>
         <file>images/icons/Vampire5thAnkhSMOL.png</file>
         <file>images/checkbox/checkbox_checked.png</file>
         <file>images/checkbox/checkbox_checked_hover.png</file>
@@ -67,5 +63,6 @@
         <file>images/icons/menu.png</file>
         <file>images/icons/lock20x20.png</file>
         <file>images/icons/unlock20x20.png</file>
+        <file>images/background-image/salubri_background_transparent.png</file>
     </qresource>
 </RCC>

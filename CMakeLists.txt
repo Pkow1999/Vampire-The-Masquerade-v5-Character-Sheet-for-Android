@@ -39,6 +39,9 @@ set(PROJECT_SOURCES
         skills.h
         skills.cpp
         skills.ui
+        options.h
+        options.cpp
+        options.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
