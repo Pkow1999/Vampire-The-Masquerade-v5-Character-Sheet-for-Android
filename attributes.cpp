@@ -60,79 +60,24 @@ void Attributes::connectAllButtonGroup(){
     if(indicatorsPointer != nullptr)
     {
         connect(ui->Resolve, &QButtonGroup::buttonClicked,indicatorsPointer,&Indicators::createWillpower);
+        connect(ui->Composure, &QButtonGroup::buttonClicked,indicatorsPointer,&Indicators::createWillpower);
+        connect(ui->Stamina, &QButtonGroup::buttonClicked,indicatorsPointer,&Indicators::createHealth);
 
     }
-    connect(ui->AttributesGroup,&QButtonGroup::buttonToggled,this,&Attributes::bolding);
+    connect(ui->AttributesGroup,&QButtonGroup::buttonToggled,this,&Attributes::callBoldingFromParent);
 
 }
 
-
-
-QLayout* Attributes::findParentLayout(QWidget* w)
+void Attributes::callBoldingFromParent(QAbstractButton *bt, bool state)
 {
-    if (w->parentWidget() != nullptr)
-        if (w->parentWidget()->layout() != nullptr)
-            return findParentLayout(w, w->parentWidget()->layout());
-    return nullptr;
+    MainWindow *w = dynamic_cast<MainWindow *> (this->nativeParentWidget());
+    if (0 != w)
+        w->bolding(bt, state, 1, 1);
 }
-
-QLayout* Attributes::findParentLayout(QWidget* w, QLayout* topLevelLayout)
-{
-    for (QObject* qo: topLevelLayout->children())
-    {
-        QLayout* layout = qobject_cast<QLayout*>(qo);
-        if (layout != nullptr)
-        {
-            if (layout->indexOf(w) > -1)
-                return layout;
-            else if (!layout->children().isEmpty())
-            {
-                layout = findParentLayout(w, layout);
-                if (layout != nullptr)
-                    return layout;
-            }
-        }
-    }
-    return nullptr;
-}
-
-void Attributes::bolding(QAbstractButton *bt, bool state)
-{
-    QFont font = findParentLayout(bt)->itemAt(0)->widget()->font();
-    font.setBold(state);
-    findParentLayout(bt)->itemAt(0)->widget()->setFont(font);
-}
-
 
 void Attributes::dynamicRemoveDots(QAbstractButton *bt)
 {
-    if(bt->isChecked())
-    {
-        for(int i = 0; i < bt->group()->buttons().size(); i++)
-        {
-            if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
-                break;
-            bt->group()->buttons().at(i)->setChecked(true);
-        }
-    }
-    else
-    {
-        int del = 0;
-        for(int i = 0; i < bt->group()->buttons().size(); i++)
-        {
-            if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
-            {
-                del = i;
-                break;
-            }
-        }
-        for(int i = del; i < bt->group()->buttons().size(); i++)
-        {
-            bt->group()->buttons().at(i)->setChecked(false);
-        }
-    }
-    if(Attributes::windowTitle().toStdString()[Attributes::windowTitle().toStdString().size() - 1] != '*')
-        Attributes::setWindowTitle(Attributes::windowTitle() + "*");
+    MainWindow::dynamicRemoveDots(bt);
 }
 
 void Attributes::calculateHealth()

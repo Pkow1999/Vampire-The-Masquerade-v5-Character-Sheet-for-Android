@@ -26,17 +26,14 @@ private slots:
     void dynamicRemoveDots(QAbstractButton *bt);
     void calculateHealth();
     void calculateWP();
-    void bolding(QAbstractButton *bt, bool state);
     void on_lockButton_toggled(bool checked);
-
+    void callBoldingFromParent(QAbstractButton *bt, bool state);
 private:
     int counter = 0;
     int hunger = 0;
     QRect geometryStack;
     Ui::Attributes *ui;
     Indicators *indicatorsPointer;
-    QLayout *findParentLayout(QWidget *w, QLayout *topLevelLayout);
-    QLayout *findParentLayout(QWidget *w);
     void connectAllButtonGroup();
     void paintEvent(QPaintEvent *)
     {

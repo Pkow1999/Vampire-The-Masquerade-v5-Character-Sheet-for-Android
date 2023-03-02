@@ -28,6 +28,9 @@ private:
     void createDynamicWidget(const QList<QString> &listOfSkills);
     QHBoxLayout *createButtons(QString nameOfSkill);
     QHBoxLayout *createSkill(QString nameOfSkill);
+    void callBoldingFromParent(QAbstractButton *bt, bool state);
+    QButtonGroup *mainGroupButton;
+
 };
 
 #endif // SKILLS_H

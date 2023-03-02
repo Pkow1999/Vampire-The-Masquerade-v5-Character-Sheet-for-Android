@@ -1,6 +1,7 @@
 #include "skills.h"
 #include "qboxlayout.h"
 #include "ui_skills.h"
+#include "mainwindow.h"
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QLineEdit>
@@ -11,7 +12,11 @@ Skills::Skills(QWidget *parent, const QList<QString> &listOfSkills) :
     ui(new Ui::Skills)
 {
     ui->setupUi(this);
+    mainGroupButton = new QButtonGroup(this);
+    mainGroupButton->setExclusive(false);
+
     createDynamicWidget(listOfSkills);
+    connect(mainGroupButton,&QButtonGroup::buttonToggled,this,&Skills::callBoldingFromParent);
 }
 
 
@@ -19,6 +24,7 @@ Skills::Skills(QWidget *parent, const QList<QString> &listOfSkills) :
 
 Skills::~Skills()
 {
+    mainGroupButton->deleteLater();
     delete ui;
 }
 void Skills::createDynamicWidget(const QList<QString> &listOfSkills)
@@ -38,6 +44,7 @@ QHBoxLayout* Skills::createSkill(QString nameOfSkill)
 
     QCheckBox *skillNameCheck = new QCheckBox(this);
     skillNameCheck->setText(nameOfSkill);
+    mainGroupButton->addButton(skillNameCheck);
     QLineEdit *specializationLine = new QLineEdit(this);
     connect(specializationLine, &QLineEdit::editingFinished, this, &Skills::lineEditHandling);
     QHBoxLayout *buttons = createButtons(nameOfSkill);
@@ -53,7 +60,7 @@ QHBoxLayout* Skills::createButtons(QString nameOfSkill)
     QHBoxLayout *buttonsLayout = new QHBoxLayout();
     buttonsLayout->setSizeConstraint(QHBoxLayout::SizeConstraint::SetFixedSize);
     buttonsLayout->setSpacing(6);
-    QButtonGroup *groupBut = new QButtonGroup();
+    QButtonGroup *groupBut = new QButtonGroup(this);
     groupBut->setExclusive(false);
     for(int i = 0; i < 5; ++i)
     {
@@ -71,68 +78,8 @@ QHBoxLayout* Skills::createButtons(QString nameOfSkill)
 }
 void Skills::dynamicRemoveDots(QAbstractButton *bt)
 {
-    if(bt->group()->id(bt) < -1)//automatycznie
-    {
-        if(bt->isChecked())
-        {
-            for(int i = 0; i < bt->group()->buttons().size(); i++)
-            {
-                if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
-                    break;
-                bt->group()->buttons().at(i)->setChecked(true);
-            }
-        }
-        else
-        {
-            int del = 0;
-            for(int i = 0; i < bt->group()->buttons().size(); i++)
-            {
-                if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
-                {
-                    del = i;
-                    break;
-                }
-            }
-            for(int i = del; i < bt->group()->buttons().size(); i++)
-            {
-                bt->group()->buttons().at(i)->setChecked(false);
-            }
-        }
-    }
-    else if(bt->group()->id(bt) == -1)
-    {
-        qDebug() << "COS POSZLO NIE TAK";
-        return;
-    }
-    else//recznie przydzielione
-    {
-        qDebug() << "RECZNIE";
-        if(bt->isChecked())
-        {
-            for(int i = 0; i < bt->group()->buttons().size(); i++)
-            {
-                if(bt->group()->button(i)->objectName() == bt->objectName())
-                    break;
-                bt->group()->button(i)->setChecked(true);
-            }
-        }
-        else
-        {
-            int del = 0;
-            for(int i = 0; i < bt->group()->buttons().size(); i++)
-            {
-                if(bt->group()->button(i)->objectName() == bt->objectName())
-                {
-                    del = i;
-                    break;
-                }
-            }
-            for(int i = del; i < bt->group()->buttons().size(); i++)
-            {
-                bt->group()->button(i)->setChecked(false);
-            }
-        }
-    }
+    MainWindow::dynamicRemoveDots(bt);
+
 }
 void Skills::on_lockButton_toggled(bool checked)
 {
@@ -164,3 +111,11 @@ void Skills::lineEditHandling()
     QLineEdit *line = static_cast<QLineEdit *>(sender());
     line->clearFocus();
 }
+
+void Skills::callBoldingFromParent(QAbstractButton *bt, bool state)
+{
+    MainWindow *w = dynamic_cast<MainWindow *> (this->nativeParentWidget());
+    if (0 != w)
+        w->bolding(bt, state, 2, 1);
+}
+

@@ -28,6 +28,7 @@ private:
     Ui::Loresheets *ui;
     QWidget* createLoreSheetWidget();
     QList<QWidget *> listOfLoresheets;
+
 };
 
 #endif // LORESHEETS_H

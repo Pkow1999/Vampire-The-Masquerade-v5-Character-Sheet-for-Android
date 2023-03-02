@@ -1,4 +1,5 @@
 #include "loresheets.h"
+#include "mainwindow.h"
 #include "ui_loresheets.h"
 
 
@@ -13,9 +14,11 @@ Loresheets::Loresheets(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     connect(ui->loresheetsButtonGroup, &QButtonGroup::buttonClicked, this, &Loresheets::dynamicRemoveDots);
 
     connect(ui->loresheetLine, &QLineEdit::editingFinished, this, &Loresheets::lineEditHandling);
+
 }
 
 Loresheets::~Loresheets()
@@ -26,11 +29,9 @@ Loresheets::~Loresheets()
 }
 
 
-
-
 QWidget *Loresheets::createLoreSheetWidget()
 {
-    QWidget *mainWidget = new QWidget;
+    QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout(mainWidget);
     mainLayout->setSizeConstraint(ui->Loresheet1->layout()->sizeConstraint());
     mainLayout->setAlignment(ui->Loresheet1->layout()->alignment());
@@ -49,7 +50,7 @@ QWidget *Loresheets::createLoreSheetWidget()
     buttonsLayout->setSizeConstraint(ui->LoresheetButtonsLayout_1->sizeConstraint());
     buttonsLayout->setAlignment(ui->LoresheetButtonsLayout_1->alignment());
     buttonsLayout->setSpacing(ui->LoresheetButtonsLayout_1->spacing());
-    QButtonGroup *groupBut = new QButtonGroup();
+    QButtonGroup *groupBut = new QButtonGroup(this);
     groupBut->setExclusive(false);
     for(int i = 0; i < 5; ++i)
     {
@@ -81,70 +82,9 @@ QWidget *Loresheets::createLoreSheetWidget()
     return mainWidget;
 }
 
-void Loresheets::dynamicRemoveDots(QAbstractButton *bt)//naprawienie sposobem tasmy klejacej
+void Loresheets::dynamicRemoveDots(QAbstractButton *bt)
 {
-    if(bt->group()->id(bt) < -1)//znaczy ze automatycznie przydzielone
-    {
-        if(bt->isChecked())
-        {
-            for(int i = 0; i < bt->group()->buttons().size(); i++)
-            {
-                if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
-                    break;
-                bt->group()->buttons().at(i)->setChecked(true);
-            }
-        }
-        else
-        {
-            int del = 0;
-            for(int i = 0; i < bt->group()->buttons().size(); i++)
-            {
-                if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
-                {
-                    del = i;
-                    break;
-                }
-            }
-            for(int i = del; i < bt->group()->buttons().size(); i++)
-            {
-                bt->group()->buttons().at(i)->setChecked(false);
-            }
-        }
-    }
-    else if(bt->group()->id(bt) == -1)
-    {
-        qDebug() << "COS POSZLO NIE TAK";
-        return;
-    }
-    else//recznie przydzielione
-    {
-        qDebug() << "RECZNIE";
-        if(bt->isChecked())
-        {
-            for(int i = 0; i < bt->group()->buttons().size(); i++)
-            {
-                if(bt->group()->button(i)->objectName() == bt->objectName())
-                    break;
-                bt->group()->button(i)->setChecked(true);
-            }
-        }
-        else
-        {
-            int del = 0;
-            for(int i = 0; i < bt->group()->buttons().size(); i++)
-            {
-                if(bt->group()->button(i)->objectName() == bt->objectName())
-                {
-                    del = i;
-                    break;
-                }
-            }
-            for(int i = del; i < bt->group()->buttons().size(); i++)
-            {
-                bt->group()->button(i)->setChecked(false);
-            }
-        }
-    }
+    MainWindow::dynamicRemoveDots(bt);
 }
 
 

@@ -26,10 +26,13 @@ private slots:
     void on_lockButton_toggled(bool checked);
 
     void lineEditHandling();
+    void callBoldingFromParent(QAbstractButton *bt, bool state);
+
 private:
     Ui::Disciplines *ui;
     QWidget* createDysciplineWidget();
     QList<QWidget *> listOfDysciplines;
+    QButtonGroup *mainGroupButton;
 };
 
 #endif // DISCIPLINES_H
