@@ -77,7 +77,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="attributeComboBox"/>
+      <widget class="QComboBox" name="attributeComboBox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -104,6 +108,9 @@
      </item>
      <item>
       <widget class="QComboBox" name="skillComboBox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizeAdjustPolicy">
         <enum>QComboBox::AdjustToContents</enum>
        </property>
@@ -141,6 +148,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QPushButton" name="rollButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Roll</string>
        </property>
@@ -148,6 +161,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="rerollButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Reroll</string>
        </property>

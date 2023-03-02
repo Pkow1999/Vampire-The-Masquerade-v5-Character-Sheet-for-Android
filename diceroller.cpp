@@ -20,14 +20,10 @@ DiceRoller::DiceRoller(QWidget *parent, const QStringList &listOfAttributes, con
     ui->setupUi(this);
     ui->attributeComboBox->addItems(listOfAttributes);
     ui->skillComboBox->addItems(listOfSkills);
+    connect(ui->diceModifier, &QSpinBox::editingFinished, this, &DiceRoller::spinBoxHandling);
 }
 
-DiceRoller::~DiceRoller()
-{
-    delete ui;
-}
-
-void DiceRoller::on_pushButton_clicked()//updateInfo
+void DiceRoller::refreshText()//updateInfo
 {
     QString Text = "";
     QMapIterator<QString, int> i(MainWindow::mapOfSkillsWithValue);
@@ -36,6 +32,16 @@ void DiceRoller::on_pushButton_clicked()//updateInfo
         Text += i.key() + ": " + QString::number(i.value()) + ", ";
     }
     ui->textBrowser->setText(Text);
+}
+
+DiceRoller::~DiceRoller()
+{
+    delete ui;
+}
+
+void DiceRoller::on_pushButton_clicked()//updateInfo Slot
+{
+    refreshText();
 }
 
 
@@ -117,3 +123,9 @@ void DiceRoller::on_rerollButton_clicked()
     }
 }
 
+
+void DiceRoller::spinBoxHandling()
+{
+    QSpinBox *spin = static_cast<QSpinBox *>(sender());
+    spin->clearFocus();
+}

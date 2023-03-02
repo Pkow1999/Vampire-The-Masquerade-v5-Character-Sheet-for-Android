@@ -407,6 +407,7 @@ void MainWindow::bolding(QAbstractButton *bt, bool state, int index, int type)
     {
         MainWindow::mapOfSkillsWithValue.remove(text);
     }
+    diceWindow->refreshText();
 }
 
 int MainWindow::countDots(QButtonGroup *grp)

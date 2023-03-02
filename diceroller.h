@@ -16,6 +16,7 @@ class DiceRoller : public QWidget
 public:
     DiceRoller(QWidget *parent = nullptr);
     DiceRoller(QWidget *parent = nullptr, const QStringList &listOfAttributes = QStringList(), const QStringList &listOfSkills = QStringList());
+    void refreshText();
     ~DiceRoller();
 
 private slots:
@@ -25,6 +26,7 @@ private slots:
 
     void on_rerollButton_clicked();
 
+    void spinBoxHandling();
 private:
     Ui::DiceRoller *ui;
     void paintEvent(QPaintEvent *)
