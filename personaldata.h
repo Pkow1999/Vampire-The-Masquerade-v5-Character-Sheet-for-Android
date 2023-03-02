@@ -1,6 +1,7 @@
 #ifndef PERSONALDATA_H
 #define PERSONALDATA_H
 
+#include <QAbstractButton>
 #include <QLineEdit>
 #include <QPaintEvent>
 #include <QPainter>
@@ -24,6 +25,8 @@ private slots:
     void lineEditHandling();
     void spinBoxHandling();
     void clanHandle();
+    void calculateBlood();
+    void dynamicRemoveDots(QAbstractButton *bt);
 private:
     Ui::PersonalData *ui;
     QList<QString> listOfClans;

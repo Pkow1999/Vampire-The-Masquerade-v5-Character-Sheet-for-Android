@@ -10,7 +10,7 @@ PersonalData::PersonalData(QWidget *parent) :
     ui->setupUi(this);
     connectAllLineEdits();
 
-    listOfClans = {"banu haqim", "brujah", "gangrel", "hecata", "lasombra", "malkavian", "ministry", "nosferatu", "ravnos", "toreador", "tremere", "tzimisce", "ventrue"};
+    listOfClans = {"banu haqim", "brujah", "gangrel", "hecata", "lasombra", "malkavian", "ministry", "nosferatu", "ravnos", "salubri", "toreador", "tremere", "tzimisce", "ventrue"};
 }
 
 QLineEdit* PersonalData::getClanLineEdit()
@@ -26,8 +26,8 @@ void PersonalData::connectAllLineEdits()
     connect(ui->lineEdit_4,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
     connect(ui->lineEdit_5,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
     connect(ui->lineEdit_6,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
-    connect(ui->lineEdit_7,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
-    connect(ui->lineEdit_8,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
+//    connect(ui->lineEdit_7,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
+//    connect(ui->lineEdit_8,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
     connect(ui->lineEdit_9,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
     connect(ui->lineEdit_10,&QLineEdit::editingFinished, this, &PersonalData::lineEditHandling);
 
@@ -35,6 +35,10 @@ void PersonalData::connectAllLineEdits()
     connect(ui->spinBox_2,&QAbstractSpinBox::editingFinished, this, &PersonalData::spinBoxHandling);
 
     connect(ui->lineEdit_4,&QLineEdit::editingFinished, this, &PersonalData::clanHandle);
+
+    connect(ui->bloodPotencyGroup, &QButtonGroup::buttonClicked, this, &PersonalData::dynamicRemoveDots);
+    connect(ui->bloodPotencyGroup, &QButtonGroup::buttonClicked, this, &PersonalData::calculateBlood);
+
 
 }
 PersonalData::~PersonalData()
@@ -73,4 +77,39 @@ void PersonalData::clanHandle()
     qDebug() <<"URL: "<< url;
     MainWindow::backgroundImageUrl = ":/images/background-image/"+url;
     qDebug() << "BACKGROUND IMAGE URL: " << MainWindow::backgroundImageUrl;
+}
+
+void PersonalData::calculateBlood()
+{
+    int bloodPotency = MainWindow::countDots(ui->bloodPotencyGroup);
+    ui->BloodPotency->setText(QString::number(bloodPotency /2 + bloodPotency % 2 + 1));
+    ui->MendAmount->setText(QString::number(bloodPotency < 6 ? bloodPotency / 2 + 1 : bloodPotency / 2));
+    ui->PowerBonus->setText(QString::number(bloodPotency / 2));
+    ui->RouseReRoll->setText(tr("Level ") + QString::number(bloodPotency > 0 ? bloodPotency /2 + bloodPotency % 2 : 0));
+    ui->BaneSevarity->setText(QString::number(bloodPotency > 0 ? bloodPotency /2 + bloodPotency % 2 + 1 : 0 ));
+
+
+
+    if(bloodPotency > 0)
+        ui->BloodPotency->setText(ui->BloodPotency->text() + tr(" dices"));
+    else
+        ui->BloodPotency->setText(ui->BloodPotency->text() + tr(" die"));
+
+    if(bloodPotency > 3)
+        ui->PowerBonus->setText(ui->PowerBonus->text() + tr(" dices"));
+    else
+        ui->PowerBonus->setText(ui->PowerBonus->text() + tr(" die"));
+
+    if(bloodPotency > 1)
+        ui->MendAmount->setText(ui->MendAmount->text() + tr(" superficial damage"));
+    else
+        ui->MendAmount->setText(ui->MendAmount->text() + tr(" superficial damage"));
+
+    if(bloodPotency > 2)
+        ui->RouseReRoll->setText(ui->RouseReRoll->text() + tr(" and Lower"));
+}
+
+void PersonalData::dynamicRemoveDots(QAbstractButton *bt)
+{
+    MainWindow::dynamicRemoveDots(bt);
 }
