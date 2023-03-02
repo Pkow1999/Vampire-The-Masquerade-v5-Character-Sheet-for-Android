@@ -23,6 +23,8 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+
+
 public:
     MainWindow(QWidget *parent = nullptr);
 
@@ -36,10 +38,15 @@ public:
     static int willpowerFromAttributes;
     static int humanity;
     static QString backgroundImageUrl;
+    static QMap<QString, int> mapOfSkillsWithValue;
+    static QMap<QString, int> ALLmapOfSkillsWithValue;
 
     ~MainWindow();
-
+    void bolding(QAbstractButton *bt, bool state, int index, int type = 0);
+    static void dynamicRemoveDots(QAbstractButton *bt);
     static int countDots(QButtonGroup *grp);
+    static QLayout *findParentLayout(QWidget *w);
+    static QLayout *findParentLayout(QWidget *w, QLayout *topLevelLayout);
 private slots:
     void on_drawerButton_toggled(bool checked);
     void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);

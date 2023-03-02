@@ -6,6 +6,8 @@
 #include <QLineEdit>
 #include <QTimer>
 #include <QScrollBar>
+#include <QLabel>
+#include <QCheckBox>
 
 
 
@@ -20,6 +22,10 @@ int MainWindow::willpowerModifier = 0;
 int MainWindow::willpowerFromAttributes = 0;
 int MainWindow::humanity = 0;
 QString MainWindow::backgroundImageUrl = "";
+QMap<QString, int> MainWindow::mapOfSkillsWithValue = QMap<QString, int>();
+QMap<QString, int> MainWindow::ALLmapOfSkillsWithValue = QMap<QString, int>();
+
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -273,15 +279,19 @@ void MainWindow::on_clanSymbolToggler_toggled(bool checked)
 
 void MainWindow::generatePages()
 {
-    QList<QString> physicalSkills = {"Athletics", "Brawl", "Craft", "Drive", "Firearms", "Larceny", "Melee", "Stealth", "Survival"};
-    QList<QString> socialSkills = {"Animal Ken", "Etiquette", "Insight", "Intimidation", "Leadership", "Performance", "Persuasion", "Streetwise", "Subterfuge"};
-    QList<QString> mentalSkills = {"Academics", "Finance", "Investigation", "Medicine", "Occult", "Politics", "Science", "Technology"};
+    QStringList physicalSkills = {"Athletics", "Brawl", "Craft", "Drive", "Firearms", "Larceny", "Melee", "Stealth", "Survival"};
+    QStringList socialSkills = {"Animal Ken", "Etiquette", "Insight", "Intimidation", "Leadership", "Performance", "Persuasion", "Streetwise", "Subterfuge"};
+    QStringList mentalSkills = {"Academics", "Awareness", "Finance", "Investigation", "Medicine", "Occult", "Politics", "Science", "Technology"};
 
+    QStringList allSkills = {""};
+    allSkills.append(physicalSkills);
+    allSkills.append(socialSkills);
+    allSkills.append(mentalSkills);
 
     attributesWindow = new Attributes(this);
     attributesWindow->setObjectName("Attributes");
 
-    diceWindow = new DiceRoller(this, attributesWindow->getAttributesList());
+    diceWindow = new DiceRoller(this, attributesWindow->getAttributesList(), allSkills);
     diceWindow->setObjectName("Dice Roller");
 
     personalWindow = new PersonalData(this);
@@ -322,12 +332,81 @@ void MainWindow::generatePages()
         QString name = widgetStack->widget(i)->objectName();
         ui->listWidget->addItem(name);
     }
-//    ui->listWidget->addItem("Attributes");
-//    ui->listWidget->addItem("Dice Roller");
-//    ui->listWidget->addItem("Personal Data");
-//    ui->listWidget->addItem("Indicators");
     ui->listWidget->setCurrentItem(ui->listWidget->item(0));
 
+}
+
+
+QLayout* MainWindow::findParentLayout(QWidget* w)
+{
+    if (w->parentWidget() != nullptr)
+        if (w->parentWidget()->layout() != nullptr)
+            return findParentLayout(w, w->parentWidget()->layout());
+    return nullptr;
+}
+
+QLayout* MainWindow::findParentLayout(QWidget* w, QLayout* topLevelLayout)
+{
+    for (QObject* qo: topLevelLayout->children())
+    {
+        QLayout* layout = qobject_cast<QLayout*>(qo);
+        if (layout != nullptr)
+        {
+            if (layout->indexOf(w) > -1)
+                return layout;
+            else if (!layout->children().isEmpty())
+            {
+                layout = findParentLayout(w, layout);
+                if (layout != nullptr)
+                    return layout;
+            }
+        }
+    }
+    return nullptr;
+}
+
+void MainWindow::bolding(QAbstractButton *bt, bool state, int index, int type)
+{
+    int indexOfText = 0;
+    if(type != 1)
+        ++indexOfText;
+    QWidget *widget = findParentLayout(bt)->itemAt(indexOfText)->widget();
+    QFont font = widget->font();
+    font.setBold(state);
+    widget->setFont(font);
+    QString text;
+    qDebug() << "BEFORE TYPE BOLDING";
+    if(type == 0)
+    {
+        QLabel *label = static_cast<QLabel *>(widget);
+        text = label->text();
+    }
+    else if(type == 1)
+    {
+        QCheckBox *checkBox = static_cast<QCheckBox *>(widget);
+        text = checkBox->text();
+    }
+    else if(type == 2)
+    {
+        QLineEdit *lineEdit = static_cast<QLineEdit *>(widget);
+        text = lineEdit->text();
+    }
+    else
+    {
+        qWarning() << "WRONG TYPE VALUE!!!!!!";
+        return;
+    }
+    qDebug() << "BEFORE STATE BOLDING";
+    if(state)
+    {
+        QLayout *layoutButton = findParentLayout(bt)->itemAt(index)->layout();
+        QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
+        MainWindow::mapOfSkillsWithValue.insert(text, MainWindow::countDots(but->group()));
+    }
+    else
+    {
+        MainWindow::mapOfSkillsWithValue.remove(text);
+    }
 }
 
 int MainWindow::countDots(QButtonGroup *grp)
@@ -345,4 +424,69 @@ int MainWindow::countDots(QButtonGroup *grp)
         }
     }
     return counter;
+}
+void MainWindow::dynamicRemoveDots(QAbstractButton *bt)//naprawienie sposobem tasmy klejacej
+{
+    if(bt->group()->id(bt) < -1)//automatycznie
+    {
+        if(bt->isChecked())
+        {
+            for(int i = 0; i < bt->group()->buttons().size(); i++)
+            {
+                if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
+                    break;
+                bt->group()->buttons().at(i)->setChecked(true);
+            }
+        }
+        else
+        {
+            int del = 0;
+            for(int i = 0; i < bt->group()->buttons().size(); i++)
+            {
+                if(bt->group()->buttons().at(i)->objectName() == bt->objectName())
+                {
+                    del = i;
+                    break;
+                }
+            }
+            for(int i = del; i < bt->group()->buttons().size(); i++)
+            {
+                bt->group()->buttons().at(i)->setChecked(false);
+            }
+        }
+    }
+    else if(bt->group()->id(bt) == -1)
+    {
+        qDebug() << "COS POSZLO NIE TAK";
+        return;
+    }
+    else//recznie przydzielione
+    {
+        qDebug() << "RECZNIE";
+        if(bt->isChecked())
+        {
+            for(int i = 0; i < bt->group()->buttons().size(); i++)
+            {
+                if(bt->group()->button(i)->objectName() == bt->objectName())
+                    break;
+                bt->group()->button(i)->setChecked(true);
+            }
+        }
+        else
+        {
+            int del = 0;
+            for(int i = 0; i < bt->group()->buttons().size(); i++)
+            {
+                if(bt->group()->button(i)->objectName() == bt->objectName())
+                {
+                    del = i;
+                    break;
+                }
+            }
+            for(int i = del; i < bt->group()->buttons().size(); i++)
+            {
+                bt->group()->button(i)->setChecked(false);
+            }
+        }
+    }
 }
