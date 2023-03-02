@@ -2,7 +2,7 @@
 #define INDICATORS_H
 
 #include <QWidget>
-
+#include <QAbstractButton>
 namespace Ui {
 class Indicators;
 }
@@ -20,6 +20,7 @@ public slots:
 private slots:
     void on_lockButton_toggled(bool checked);
 
+    void dynamicRemoveDots(QAbstractButton *bt);
 private:
     Ui::Indicators *ui;
     void deleteHealth(int size_);

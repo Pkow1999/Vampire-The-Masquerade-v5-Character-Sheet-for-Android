@@ -14,7 +14,7 @@ Indicators::Indicators(QWidget *parent) :
 
     connect(ui->wpModifier,&QAbstractSpinBox::editingFinished,this,&Indicators::createWillpower);
     connect(ui->healthModifier,&QAbstractSpinBox::editingFinished,this,&Indicators::createHealth);
-
+    connect(ui->hungerGroup, &QButtonGroup::buttonClicked,this, &Indicators::dynamicRemoveDots);
 }
 
 Indicators::~Indicators()
@@ -236,5 +236,11 @@ void Indicators::on_lockButton_toggled(bool checked)
             spin->setEnabled(true);
         }
     }
+}
+
+void Indicators::dynamicRemoveDots(QAbstractButton *bt)
+{
+    MainWindow::dynamicRemoveDots(bt);
+    MainWindow::hunger = MainWindow::countDots(bt->group());
 }
 
