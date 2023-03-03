@@ -156,7 +156,7 @@ QJsonObject Loresheets::write() const
         QJsonObject loresheet;
         QLayout *layoutButton = MainWindow::findParentLayout(lineEdit)->itemAt(1)->layout();
         QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
-        loresheet["dots"] = MainWindow::countDots(but->group());
+        loresheet["dots"] = QString::number(MainWindow::countDots(but->group()));
         loresheet["content"] = widgetOfLoresheet->findChild<QTextEdit *>()->toPlainText();
         if(json.contains(NameOfLoresheet))
         {
@@ -169,4 +169,69 @@ QJsonObject Loresheets::write() const
         }
     }
     return json;
+}
+
+void Loresheets::read(const QJsonObject &json)
+{
+    int size_ = json.count();
+    for(int i = 1; i < size_; ++i)
+    {
+        on_addNewWidgetButton_clicked();
+    }
+    int counter = 0;
+    for (auto key : json.keys())
+    {
+        qDebug() << "Lecimy po kejach" << key;
+        QLineEdit *lineEdit = listOfLoresheets.at(counter)->findChild<QLineEdit *>();
+        lineEdit->setText(key);
+        QJsonObject details = json[key].toObject();
+        if(details.contains("dots") && details["dots"].isString())
+        {
+            int dots = details["dots"].toString().toInt();
+            qDebug() << "LayoutButton";
+            QLayout *layoutButton = MainWindow::findParentLayout(lineEdit)->itemAt(1)->layout();
+            if(dots > 0)
+            {
+                if(lineEdit == ui->loresheetLine)
+                {
+                    dots = -dots - 1;
+                }
+                else
+                {
+                    --dots;
+                }
+                QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
+                but->group()->button(dots)->click();
+                qDebug() << "Kliknalem w odpowiednie buttony";
+            }
+
+        }
+        if(details.contains("content") && details["content"].isString())
+        {
+            QTextEdit *textEdit = listOfLoresheets.at(counter)->findChild<QTextEdit *>();
+            textEdit->setText(details["content"].toString());
+        }
+        ++counter;
+    }
+}
+
+
+void Loresheets::clear()
+{
+   for(auto radioBut : this->findChildren<QRadioButton *>())
+   {
+       radioBut->setChecked(false);
+   }
+   for(auto lineEdit : this->findChildren<QLineEdit *>())
+   {
+       lineEdit->clear();
+   }
+   for(auto textEdit : this->findChildren<QTextEdit *>())
+   {
+       textEdit->clear();
+   }
+   for(int i = 1; i < listOfLoresheets.count(); ++i)
+   {
+       on_deleteWidgetButton_clicked();
+   }
 }

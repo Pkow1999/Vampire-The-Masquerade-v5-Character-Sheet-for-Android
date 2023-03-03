@@ -23,12 +23,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#PersonalData {
-	background-image: url(:/images/.png);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-origin: content;
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>

@@ -19,6 +19,9 @@ public:
     explicit Skills(QWidget *parent = nullptr, const QStringList &listOfSkills = QStringList());
     ~Skills();
     QJsonObject write() const;
+    void read(const QJsonObject &json);
+    void clear();
+
 private slots:
     void on_lockButton_toggled(bool checked);
 private:

@@ -20,13 +20,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#DiceRoller{
-	background-image: url(:/images/Ventrue_transparent_small.png);
-	background-position: center;
-	background-repeat: no-repeat;
-    background-origin: content;
-    background-clip: padding;
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="sizeConstraint">
@@ -156,10 +150,16 @@
      <item>
       <widget class="QPushButton" name="rollButton">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
        </property>
        <property name="text">
         <string>Roll</string>
@@ -169,10 +169,16 @@
      <item>
       <widget class="QPushButton" name="rerollButton">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
        </property>
        <property name="text">
         <string>Reroll</string>

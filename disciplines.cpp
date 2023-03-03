@@ -195,8 +195,9 @@ QJsonObject Disciplines::write() const
         QString const NameOfDiscipline = lineEdit->text();
         QJsonObject discipline;
         QLayout *layoutButton = MainWindow::findParentLayout(lineEdit)->itemAt(2)->layout();
+
         QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
-        discipline["dots"] = MainWindow::countDots(but->group());
+        discipline["dots"] = QString::number(MainWindow::countDots(but->group()));
         QJsonArray powers;
         for(auto powersLineEdits : widgetOfDiscipline->findChildren<QLineEdit *>())
         {
@@ -218,4 +219,76 @@ QJsonObject Disciplines::write() const
 
     }
     return json;
+}
+
+void Disciplines::read(const QJsonObject &json)
+{
+    int size_ = json.count();
+    for(int i = 1; i < size_; ++i)
+    {
+        on_addNewWidgetButton_clicked();
+    }
+    int counter = 0;
+    for (auto key : json.keys())
+    {
+        qDebug() << "Lecimy po kejach";
+        QLineEdit *lineEdit = listOfDysciplines.at(counter)->findChild<QLineEdit *>();
+        lineEdit->setText(key);
+        QJsonObject details = json[key].toObject();
+        if(details.contains("dots") && details["dots"].isString())
+        {
+            int dots = details["dots"].toString().toInt();
+            qDebug() << "LayoutButton";
+            QLayout *layoutButton = MainWindow::findParentLayout(lineEdit)->itemAt(2)->layout();
+            if(dots > 0)
+            {
+                if(lineEdit == ui->lineEdit_25)
+                {
+                    dots = -dots - 1;
+                }
+                else
+                {
+                    --dots;
+                }
+                QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
+                but->group()->button(dots)->click();
+                qDebug() << "Kliknalem w odpowiednie buttony";
+                if(details.contains("powers") && details["powers"].isArray())
+                {
+                    QJsonArray powers = details["powers"].toArray();
+                    int counterPowers = 0;
+                    for(auto powersLineEdits : listOfDysciplines.at(counter)->findChildren<QLineEdit *>())
+                    {
+                        if(powersLineEdits != lineEdit)
+                        {
+                            powersLineEdits->setText(powers.at(counterPowers).toString());
+                            ++counterPowers;
+                        }
+
+                    }
+                }
+            }
+
+        }
+        ++counter;
+    }
+}
+
+void Disciplines::clear()
+{
+    qDebug() << "Clear begin";
+
+   for(auto radioBut : this->findChildren<QRadioButton *>())
+   {
+       radioBut->setChecked(false);
+   }
+   for(auto lineEdit : this->findChildren<QLineEdit *>())
+   {
+       lineEdit->clear();
+   }
+   for(int i = 1; i < listOfDysciplines.count(); ++i)
+   {
+       on_deleteWidgetButton_clicked();
+   }
+   qDebug() <<"Clear end";
 }

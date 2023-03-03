@@ -10,6 +10,7 @@
 #include "attributes.h"
 #include "diceroller.h"
 #include "indicators.h"
+#include "options.h"
 #include "personaldata.h"
 #include "disciplines.h"
 #include "loresheets.h"
@@ -40,13 +41,16 @@ public:
     static QString backgroundImageUrl;
     static QMap<QString, int> mapOfSkillsWithValue;
     static QMap<QString, int> ALLmapOfSkillsWithValue;
-
+    static bool checkFilesPermission();
     ~MainWindow();
     void bolding(QAbstractButton *bt, bool state, int index, int type = 0);
     static void dynamicRemoveDots(QAbstractButton *bt);
     static int countDots(QButtonGroup *grp);
     static QLayout *findParentLayout(QWidget *w);
     static QLayout *findParentLayout(QWidget *w, QLayout *topLevelLayout);
+
+    QJsonObject getSaveData();
+    void readSaveData(const QJsonObject &json);
 private slots:
     void on_drawerButton_toggled(bool checked);
     void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
@@ -64,6 +68,7 @@ private:
     Skills *physicalSkillsWindow;
     Skills *socialSkillsWindow;
     Skills *mentalSkillsWindow;
+    Options *optionsWindow;
     QStackedWidget *widgetStack;
 
     void generatePages();

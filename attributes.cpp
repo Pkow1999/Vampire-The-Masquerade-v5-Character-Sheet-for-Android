@@ -115,7 +115,13 @@ void Attributes::on_lockButton_toggled(bool checked)
 
     }
 }
-
+void Attributes::clear()
+{
+   for(auto radioBut : this->findChildren<QRadioButton *>())
+   {
+       radioBut->setChecked(false);
+   }
+}
 QJsonObject Attributes::write() const
 {
     QList<QCheckBox *> listOfAttributes = this->findChildren<QCheckBox *>();
@@ -124,7 +130,32 @@ QJsonObject Attributes::write() const
     {
         QLayout *layoutButton = MainWindow::findParentLayout(checkbox)->itemAt(1)->layout();
         QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
-        json[checkbox->text()] = MainWindow::countDots(but->group());
+        json[checkbox->text()] = QString::number(MainWindow::countDots(but->group()));
     }
     return json;
+}
+
+void Attributes::read(const QJsonObject &json)
+{
+    qDebug() << "okno atrybutow begin";
+    QList<QCheckBox *> listOfAttributes = this->findChildren<QCheckBox *>();
+    for(auto checkbox : listOfAttributes)
+    {
+        QLayout *layoutButton = MainWindow::findParentLayout(checkbox)->itemAt(1)->layout();
+        if(json.contains(checkbox->text()))
+        {
+            int dots = json[checkbox->text()].toString().toInt() - 1;
+            qDebug() << "butBefor";
+            if(dots >= 0){
+                QRadioButton *but = static_cast<QRadioButton *>(layoutButton->itemAt(dots)->widget());
+                qDebug() << "butAfter";
+
+                but->click();
+            }
+
+            qDebug() << "okno atrybutow";
+
+        }
+
+    }
 }

@@ -119,7 +119,7 @@ QJsonObject PersonalData::write() const
 {
     QJsonObject json;
     int counter = 1;
-    json["Blood Potency"] = MainWindow::countDots(ui->bloodPotencyGroup);
+    json["Blood Potency"] = QString::number(MainWindow::countDots(ui->bloodPotencyGroup));
     QList<QLabel *> listOfLabels = ui->personalWidget->findChildren<QLabel *>();
     listOfLabels.removeOne(ui->currentExp);
     listOfLabels.removeOne(ui->allExp);
@@ -129,7 +129,58 @@ QJsonObject PersonalData::write() const
         QLineEdit * valueText = static_cast<QLineEdit *>(layout->itemAt(1)->widget());
         json[label->text()] = valueText->text();
     }
-    json[ui->currentExp->text()] = ui->spinBox->value();
-    json[ui->allExp->text()] = ui->spinBox_2->value();
+    json[ui->currentExp->text()] = QString::number(ui->spinBox->value());
+    json[ui->allExp->text()] = QString::number(ui->spinBox_2->value());
     return json;
+}
+
+void PersonalData::read(const QJsonObject &json)
+{
+    if(json.contains("Blood Potency") && json["Blood Potency"].isString())
+    {
+        if(json["Blood Potency"].toString().toInt() != 0)
+        {
+            int dots = -json["Blood Potency"].toString().toInt() - 1;
+            ui->bloodPotencyGroup->button(dots)->click();
+        }
+    }
+    QList<QLabel *> listOfLabels = ui->personalWidget->findChildren<QLabel *>();
+    listOfLabels.removeOne(ui->currentExp);
+    listOfLabels.removeOne(ui->allExp);
+    for(auto label : listOfLabels)
+    {
+        QLayout *layout = MainWindow::findParentLayout(label);
+        QLineEdit * valueText = static_cast<QLineEdit *>(layout->itemAt(1)->widget());
+        if(json.contains(label->text()) && json[label->text()].isString())
+        {
+            QLineEdit * valueText = static_cast<QLineEdit *>(layout->itemAt(1)->widget());
+            valueText->setText(json[label->text()].toString());
+        }
+    }
+    if(json.contains(ui->currentExp->text()) && json[ui->currentExp->text()].isString())
+    {
+        ui->spinBox->setValue(json[ui->currentExp->text()].toString().toInt());
+    }
+    if(json.contains(ui->allExp->text()) && json[ui->allExp->text()].isString())
+    {
+        ui->spinBox_2->setValue(json[ui->allExp->text()].toString().toInt());
+    }
+
+
+}
+
+void PersonalData::clear()
+{
+    for(auto radioBut : this->findChildren<QRadioButton *>())
+    {
+        radioBut->setChecked(false);
+    }
+    for(auto lineEdit : this->findChildren<QLineEdit *>())
+    {
+        lineEdit->clear();
+    }
+    for(auto spinBox : this->findChildren<QSpinBox *>())
+    {
+        spinBox->setValue(0);
+    }
 }

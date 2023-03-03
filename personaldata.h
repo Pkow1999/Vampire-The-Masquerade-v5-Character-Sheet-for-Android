@@ -19,9 +19,13 @@ class PersonalData : public QWidget
 public:
     explicit PersonalData(QWidget *parent = nullptr);
     QLineEdit* getClanLineEdit();
+
     ~PersonalData();
 
     QJsonObject write() const;
+    void read(const QJsonObject& json);
+
+    void clear();
 private slots:
     void lineEditHandling();
     void spinBoxHandling();

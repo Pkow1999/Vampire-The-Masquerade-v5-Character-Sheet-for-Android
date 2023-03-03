@@ -248,21 +248,106 @@ void Indicators::dynamicRemoveDots(QAbstractButton *bt)
 QJsonObject Indicators::write()
 {
     QJsonObject json;
-    json["hunger"] = MainWindow::countDots(ui->hungerGroup);
+    json["hunger"] = QString::number(MainWindow::countDots(ui->hungerGroup));
 
     QJsonObject healthDetails;
-    healthDetails["modifier"] = ui->healthModifier->value();
-    healthDetails["superficial"] = countIndicators(ui->Health, MainWindow::healthPool).first;
-    healthDetails["agravated"] = countIndicators(ui->Health, MainWindow::healthPool).second;
+    healthDetails["modifier"] = QString::number(ui->healthModifier->value());
+    healthDetails["superficial"] = QString::number(countIndicators(ui->Health, MainWindow::healthPool).first);
+    healthDetails["agravated"] = QString::number(countIndicators(ui->Health, MainWindow::healthPool).second);
     json["health"] = healthDetails;
 
 
     QJsonObject willpowerDetails;
-    willpowerDetails["modifier"] = ui->wpModifier->value();
-    willpowerDetails["superficial"] = countIndicators(ui->Willpower, MainWindow::willpowerPool).first;
-    willpowerDetails["agravated"] = countIndicators(ui->Willpower, MainWindow::willpowerPool).second;
+    willpowerDetails["modifier"] = QString::number(ui->wpModifier->value());
+    willpowerDetails["superficial"] = QString::number(countIndicators(ui->Willpower, MainWindow::willpowerPool).first);
+    willpowerDetails["agravated"] = QString::number(countIndicators(ui->Willpower, MainWindow::willpowerPool).second);
     json["willpower"] = willpowerDetails;
 
-    json["humanity"] = countIndicators(ui->Humanity,10).second;
+    json["humanity"] = QString::number(countIndicators(ui->Humanity,10).second);
     return json;
+}
+
+void Indicators::clear()
+{
+    for(auto spinBox : this->findChildren<QSpinBox *>())
+    {
+        spinBox->setValue(0);
+    }
+
+    for(auto checkBox : this->findChildren<QCheckBox *>())
+    {
+        checkBox->setCheckState(Qt::Unchecked);
+    }
+}
+
+void Indicators::read(const QJsonObject &json)
+{
+    if(json.contains("health") && json["health"].isObject())
+    {
+        QJsonObject healthDetails = json["health"].toObject();
+        int modifier = healthDetails["modifier"].toString().toInt();
+        int agravated = healthDetails["agravated"].toString().toInt();
+        int superficial = healthDetails["superficial"].toString().toInt();
+        ui->healthModifier->setValue(modifier);
+        qDebug() << "Modifier Życia ustawiowny";
+        for(int i = 0 ; i < agravated + superficial; i++)
+        {
+            QAbstractButton *but = qobject_cast <QAbstractButton *> (ui->Health->itemAt(i)->widget());
+            but->click();
+        }
+        for(int i = 0 ; i < agravated; i++)
+        {
+            QAbstractButton *but = qobject_cast <QAbstractButton *> (ui->Health->itemAt(i)->widget());
+            but->click();
+        }
+
+    }
+
+    if(json.contains("willpower") && json["willpower"].isObject())
+    {
+        QJsonObject willpowerDetails = json["willpower"].toObject();
+        int modifier = willpowerDetails["modifier"].toString().toInt();
+        int agravated = willpowerDetails["agravated"].toString().toInt();
+        int superficial = willpowerDetails["superficial"].toString().toInt();
+        ui->wpModifier->setValue(modifier);
+        qDebug() << "Modifier sily woli ustawiowny";
+
+        for(int i = 0 ; i < agravated + superficial; i++)
+        {
+            QAbstractButton *but = qobject_cast <QAbstractButton *> (ui->Willpower->itemAt(i)->widget());
+            but->click();
+        }
+        for(int i = 0 ; i < agravated; i++)
+        {
+            QAbstractButton *but = qobject_cast <QAbstractButton *> (ui->Willpower->itemAt(i)->widget());
+            but->click();
+        }
+        qDebug() << "sila woli naklikana";
+
+    }
+    if(json.contains("hunger") && json["hunger"].isString())
+    {
+        qDebug() << "głód znaleziony";
+        int hunger = json["hunger"].toString().toInt();
+        if(hunger != 0)
+        {
+            hunger = -json["hunger"].toString().toInt()-1;
+            ui->hungerGroup->button(hunger)->click();
+            qDebug() << "głód naklikany";
+        }
+
+    }
+    if(json.contains("humanity") && json["humanity"].isString())
+    {
+        int humanity = json["humanity"].toString().toInt();
+        qDebug() << "humanity znalezione";
+
+        for(int i = 0; i < humanity; i++)
+        {
+            QCheckBox *czek = qobject_cast <QCheckBox * >(ui->Humanity->itemAt(i)->widget());
+            czek->setCheckState(Qt::CheckState::Checked);
+        }
+        qDebug() << "humanity naklikane";
+
+    }
 }

@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
 
 #include <QScroller>
 #include <QScreen>
@@ -8,10 +8,9 @@
 #include <QScrollBar>
 #include <QLabel>
 #include <QCheckBox>
-#include <QFile>
-#include <QJsonDocument>
 
 #include <QStandardPaths>
+#include <QtCore/private/qandroidextras_p.h>
 
 int MainWindow::counter = 0;
 int MainWindow::hunger = 0;
@@ -276,34 +275,7 @@ void MainWindow::on_clanSymbolToggler_toggled(bool checked)
     {
         clearBackground();
     }
-    QJsonObject jsondiscp = disciplineWindow->write();
-    //qDebug() << jsondiscp;
-    QJsonObject jsonatr = attributesWindow->write();
-    //qDebug() << jsonatr;
-    QJsonObject jsonPhys = physicalSkillsWindow->write();
-    QJsonObject jsonMent = mentalSkillsWindow->write();
-    QJsonObject jsonSoc = socialSkillsWindow->write();
-    QJsonObject jsonInd = indicatorsWindow->write();
-    QJsonObject jsonLore = loresheetsWindow->write();
-    QJsonObject jsonPersonal = personalWindow->write();
-//    qDebug() << "ALL:";
-    QJsonObject json;
-    json["Attributes"] = jsonatr;
-    json["Disciplines"] = jsondiscp;
-    json["Physical Skills"] = jsonPhys;
-    json["Social Skills"] = jsonSoc;
-    json["Mental Skills"] = jsonMent;
-    json["Indicators"] = jsonInd;
-    json["Loresheets"] = jsonLore;
-    json["Personal Data"] = jsonPersonal;
 
-    auto path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    auto directory= path + "/saves/";
-    auto fileName = "Francis.sav";
-    QFile saveFile(directory + fileName);
-    saveFile.write(QJsonDocument(json).toJson());
-    saveFile.close();
-//    qDebug() << json;
 
 
 }
@@ -347,6 +319,9 @@ void MainWindow::generatePages()
     mentalSkillsWindow = new Skills(this, mentalSkills);
     mentalSkillsWindow->setObjectName("Mental Skills");
 
+    optionsWindow = new Options(this);
+    optionsWindow->setObjectName("Options");
+
     widgetStack = new QStackedWidget;
     widgetStack->addWidget(attributesWindow);
     widgetStack->addWidget(diceWindow);
@@ -357,6 +332,7 @@ void MainWindow::generatePages()
     widgetStack->addWidget(physicalSkillsWindow);
     widgetStack->addWidget(socialSkillsWindow);
     widgetStack->addWidget(mentalSkillsWindow);
+    widgetStack->addWidget(optionsWindow);
 
     for(int i = 0; i < widgetStack->count(); ++i)
     {
@@ -394,6 +370,96 @@ QLayout* MainWindow::findParentLayout(QWidget* w, QLayout* topLevelLayout)
         }
     }
     return nullptr;
+}
+
+QJsonObject MainWindow::getSaveData()
+{
+    QJsonObject Mainjson;
+
+    QJsonObject jsondiscp = disciplineWindow->write();
+    QJsonObject jsonatr = attributesWindow->write();
+    QJsonObject jsonPhys = physicalSkillsWindow->write();
+    QJsonObject jsonMent = mentalSkillsWindow->write();
+    QJsonObject jsonSoc = socialSkillsWindow->write();
+    QJsonObject jsonInd = indicatorsWindow->write();
+    QJsonObject jsonLore = loresheetsWindow->write();
+    QJsonObject jsonPersonal = personalWindow->write();
+
+    Mainjson["Attributes"] = jsonatr;
+    Mainjson["Disciplines"] = jsondiscp;
+    Mainjson["Physical Skills"] = jsonPhys;
+    Mainjson["Social Skills"] = jsonSoc;
+    Mainjson["Mental Skills"] = jsonMent;
+    Mainjson["Indicators"] = jsonInd;
+    Mainjson["Loresheets"] = jsonLore;
+    Mainjson["Personal Data"] = jsonPersonal;
+    qDebug() << Mainjson;
+    return Mainjson;
+}
+
+void MainWindow::readSaveData(const QJsonObject &json)
+{
+    if(json.contains("Attributes") && json["Attributes"].isObject())
+    {
+        qDebug() << "JSON MA ATRYBUTY!!!";
+        qDebug() <<json["Attributes"];
+        attributesWindow->clear();
+        attributesWindow->read(json["Attributes"].toObject());
+    }
+    if(json.contains("Physical Skills") && json["Physical Skills"].isObject())
+    {
+        qDebug() << "Json ma fizyczne skilles";
+        qDebug() <<json["Physical Skills"];
+        physicalSkillsWindow->clear();
+        physicalSkillsWindow->read(json["Physical Skills"].toObject());
+
+    }
+    if(json.contains("Mental Skills") && json["Mental Skills"].isObject())
+    {
+        qDebug() << "Json ma Mentalne skilles";
+        qDebug() <<json["Mental Skills"];
+        mentalSkillsWindow->clear();
+        mentalSkillsWindow->read(json["Physical Skills"].toObject());
+
+    }
+    if(json.contains("Social Skills") && json["Social Skills"].isObject())
+    {
+        qDebug() << "Json ma Social skilles";
+        qDebug() <<json["Social Skills"];
+        mentalSkillsWindow->clear();
+        mentalSkillsWindow->read(json["Social Skills"].toObject());
+
+    }
+    if(json.contains("Personal Data") && json["Personal Data"].isObject())
+    {
+        qDebug() << "Json ma Personal Data";
+        qDebug() <<json["Personal Data"];
+        personalWindow->clear();
+        personalWindow->read(json["Personal Data"].toObject());
+
+    }
+    if(json.contains("Indicators") && json["Indicators"].isObject())
+    {
+        qDebug() << "Json ma Indicators";
+        qDebug() <<json["Indicators"];
+        indicatorsWindow->clear();
+        indicatorsWindow->read(json["Indicators"].toObject());
+
+    }
+    if(json.contains("Disciplines") && json["Disciplines"].isObject())
+    {
+        qDebug() << "Json ma Disciplines";
+        qDebug() <<json["Disciplines"];
+        disciplineWindow->clear();
+        disciplineWindow->read(json["Disciplines"].toObject());
+    }
+    if(json.contains("Loresheets") && json["Loresheets"].isObject())
+    {
+        qDebug() << "Json ma Loresheets";
+        qDebug() <<json["Loresheets"];
+        loresheetsWindow->clear();
+        loresheetsWindow->read(json["Loresheets"].toObject());
+    }
 }
 
 void MainWindow::bolding(QAbstractButton *bt, bool state, int index, int type)
@@ -523,3 +589,18 @@ void MainWindow::dynamicRemoveDots(QAbstractButton *bt)//naprawienie sposobem ta
     }
 }
 
+bool MainWindow::checkFilesPermission()
+{
+    auto r = QtAndroidPrivate::checkPermission(QtAndroidPrivate::Storage).result();
+    qDebug() << "PERMISJA: " << r;
+    if (r == QtAndroidPrivate::Denied)
+    {
+
+        r = QtAndroidPrivate::requestPermission(QtAndroidPrivate::Storage).result();
+        qDebug() << "PRÓBA NR 2: " << r;
+
+        if (r == QtAndroidPrivate::Denied)
+            return false;
+    }
+    return true;
+}

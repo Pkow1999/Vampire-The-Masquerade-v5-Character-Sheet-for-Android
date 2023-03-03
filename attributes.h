@@ -22,6 +22,9 @@ public:
     QStringList getAttributesList();
     void setIndicatorsPointer(Indicators *ind);
     QJsonObject write() const;
+    void read(const QJsonObject& json);
+    void clear();
+
     ~Attributes();
 
 private slots:

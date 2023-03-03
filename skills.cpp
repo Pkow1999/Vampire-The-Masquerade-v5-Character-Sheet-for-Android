@@ -128,7 +128,9 @@ QJsonObject Skills::write() const
         QJsonObject details;
         QLayout *layoutButton = MainWindow::findParentLayout(checkbox)->itemAt(2)->layout();
         QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
-        details["dots"] = MainWindow::countDots(but->group());
+        int dots = MainWindow::countDots(but->group());
+        qDebug() << "ZAPISANO " <<  checkbox->text() << " Dots: " << dots;
+        details["dots"] = QString::number(dots);
 
         QLineEdit *lineEdit = static_cast<QLineEdit *>(MainWindow::findParentLayout(checkbox)->itemAt(1)->widget());
         details["specializations"] = lineEdit->text();
@@ -137,3 +139,62 @@ QJsonObject Skills::write() const
     }
     return json;
 }
+
+void Skills::read(const QJsonObject &json)
+{
+    qDebug() <<"Okno skilli begin";
+    QList<QCheckBox *> listOfSkills = this->findChildren<QCheckBox *>();
+    for(auto checkbox : listOfSkills)
+    {
+        qDebug() << "Iterujemy po checkboxach";
+        QLayout *layoutButton = MainWindow::findParentLayout(checkbox)->itemAt(2)->layout();
+        if(json.contains(checkbox->text()) && json[checkbox->text()].isObject())
+        {
+            qDebug() << "Skill istnieje, wez detale";
+
+            QJsonObject details = json[checkbox->text()].toObject();
+            int dots = 0;
+            QString specialization = "";
+            if(details.contains("dots") && details["dots"].isString())
+            {
+                qDebug() << "Dots istnieje i jest stringiem, zapisz wartosc";
+                dots = details["dots"].toString().toInt();
+            }
+            if(dots != 0)
+            {
+                qDebug() <<"dotsy nie sa 0, przypis wartosc" << dots;
+                --dots;
+                QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
+                but->group()->button(dots)->click();
+                //but->click();
+                qDebug() <<"Przypisano wartosc kropek";
+            }
+            if(details.contains("specializations") && details["specializations"].isString())
+            {
+                qDebug() << "Specjalizacje istnieja, zapisz jakie";
+
+                specialization = details["specializations"].toString();
+                QLineEdit *lineEdit = static_cast<QLineEdit *>(MainWindow::findParentLayout(checkbox)->itemAt(1)->widget());
+                lineEdit->setText(specialization);
+            }
+            qDebug() <<"SKILL: " << checkbox->text() << " DOTS: " << dots << " Specialization: " << specialization;
+
+            qDebug() << "okno skilli";
+
+        }
+
+    }
+}
+
+void Skills::clear()
+{
+   for(auto radioBut : this->findChildren<QRadioButton *>())
+   {
+       radioBut->setChecked(false);
+   }
+   for(auto lineEdit : this->findChildren<QLineEdit *>())
+   {
+       lineEdit->clear();
+   }
+}
+

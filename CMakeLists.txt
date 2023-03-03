@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
@@ -67,7 +68,8 @@ else()
     endif()
 endif()
 
-target_link_libraries(Vtm_sheet_android PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Vtm_sheet_android PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt6::CorePrivate)
+
 
 set_target_properties(Vtm_sheet_android PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

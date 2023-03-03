@@ -17,6 +17,8 @@ public:
     ~Disciplines();
 
     QJsonObject write() const;
+    void read(const QJsonObject& json);
+    void clear();
 private slots:
     void dynamicRemoveDots(QAbstractButton *bt);
     void dynamicPowersCreation(QAbstractButton *bt);

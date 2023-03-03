@@ -129,3 +129,5 @@ void DiceRoller::spinBoxHandling()
     QSpinBox *spin = static_cast<QSpinBox *>(sender());
     spin->clearFocus();
 }
+
+

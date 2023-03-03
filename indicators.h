@@ -15,6 +15,8 @@ public:
     explicit Indicators(QWidget *parent = nullptr);
     ~Indicators();
     QJsonObject write();
+    void clear();
+    void read(const QJsonObject& json);
 public slots:
     void createWillpower();
     void createHealth();
