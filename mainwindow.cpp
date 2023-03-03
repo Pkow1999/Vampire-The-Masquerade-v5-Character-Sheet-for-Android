@@ -419,15 +419,15 @@ void MainWindow::readSaveData(const QJsonObject &json)
         qDebug() << "Json ma Mentalne skilles";
         qDebug() <<json["Mental Skills"];
         mentalSkillsWindow->clear();
-        mentalSkillsWindow->read(json["Physical Skills"].toObject());
+        mentalSkillsWindow->read(json["Mental Skills"].toObject());
 
     }
     if(json.contains("Social Skills") && json["Social Skills"].isObject())
     {
         qDebug() << "Json ma Social skilles";
         qDebug() <<json["Social Skills"];
-        mentalSkillsWindow->clear();
-        mentalSkillsWindow->read(json["Social Skills"].toObject());
+        socialSkillsWindow->clear();
+        socialSkillsWindow->read(json["Social Skills"].toObject());
 
     }
     if(json.contains("Personal Data") && json["Personal Data"].isObject())
