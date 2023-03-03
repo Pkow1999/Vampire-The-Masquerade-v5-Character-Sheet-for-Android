@@ -140,7 +140,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="diceModifier"/>
+      <widget class="QSpinBox" name="diceModifier">
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="correctionMode">
+        <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

@@ -10,6 +10,7 @@ PersonalData::PersonalData(QWidget *parent) :
     ui->setupUi(this);
     connectAllLineEdits();
 
+    calculateBlood();
     listOfClans = {"banu haqim", "brujah", "gangrel", "hecata", "lasombra", "malkavian", "ministry", "nosferatu", "ravnos", "salubri", "toreador", "tremere", "tzimisce", "ventrue"};
 }
 
@@ -112,4 +113,23 @@ void PersonalData::calculateBlood()
 void PersonalData::dynamicRemoveDots(QAbstractButton *bt)
 {
     MainWindow::dynamicRemoveDots(bt);
+}
+
+QJsonObject PersonalData::write() const
+{
+    QJsonObject json;
+    int counter = 1;
+    json["Blood Potency"] = MainWindow::countDots(ui->bloodPotencyGroup);
+    QList<QLabel *> listOfLabels = ui->personalWidget->findChildren<QLabel *>();
+    listOfLabels.removeOne(ui->currentExp);
+    listOfLabels.removeOne(ui->allExp);
+    for(auto label : listOfLabels)
+    {
+        QLayout *layout = MainWindow::findParentLayout(label);
+        QLineEdit * valueText = static_cast<QLineEdit *>(layout->itemAt(1)->widget());
+        json[label->text()] = valueText->text();
+    }
+    json[ui->currentExp->text()] = ui->spinBox->value();
+    json[ui->allExp->text()] = ui->spinBox_2->value();
+    return json;
 }

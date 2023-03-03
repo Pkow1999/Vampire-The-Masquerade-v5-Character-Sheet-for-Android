@@ -2,6 +2,7 @@
 #include "ui_disciplines.h"
 
 #include <QAbstractButton>
+#include <QJsonArray>
 #include <QPushButton>
 #include "mainwindow.h"
 
@@ -21,6 +22,7 @@ Disciplines::Disciplines(QWidget *parent) :
 
 
     connect(ui->lineEdit_25, &QLineEdit::editingFinished, this, &Disciplines::lineEditHandling);
+    listOfDysciplines.append(ui->Discipline1);
 }
 
 Disciplines::~Disciplines()
@@ -133,7 +135,7 @@ void Disciplines::on_addNewWidgetButton_clicked()
 
 void Disciplines::on_deleteWidgetButton_clicked()
 {
-    if(!listOfDysciplines.isEmpty())
+    if(listOfDysciplines.count() > 1)
     {
         QWidget *widgetToDelete = listOfDysciplines.back();
         QLineEdit *lineEdit = widgetToDelete->findChild<QLineEdit *>();
@@ -175,9 +177,45 @@ void Disciplines::lineEditHandling()
     line->clearFocus();
 }
 
-void Disciplines::callBoldingFromParent(QAbstractButton *bt, bool state)
+void Disciplines::callBoldingFromParent(QAbstractButton *bt, const bool& state)
 {
     MainWindow *w = dynamic_cast<MainWindow *> (this->nativeParentWidget());
     if (0 != w)
         w->bolding(bt, state, 2, 2);
+}
+
+
+QJsonObject Disciplines::write() const
+{
+    QJsonObject json;
+    int counter = 1;
+    for(auto widgetOfDiscipline : listOfDysciplines)
+    {
+        QLineEdit *lineEdit = widgetOfDiscipline->findChild<QLineEdit *>();
+        QString const NameOfDiscipline = lineEdit->text();
+        QJsonObject discipline;
+        QLayout *layoutButton = MainWindow::findParentLayout(lineEdit)->itemAt(2)->layout();
+        QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
+        discipline["dots"] = MainWindow::countDots(but->group());
+        QJsonArray powers;
+        for(auto powersLineEdits : widgetOfDiscipline->findChildren<QLineEdit *>())
+        {
+            if(powersLineEdits != lineEdit)
+            {
+                powers.append(powersLineEdits->text());
+            }
+        }
+        discipline["powers"] = powers;
+        if(json.contains(NameOfDiscipline))
+        {
+            json[NameOfDiscipline + QString::number(counter)] = discipline;
+            ++counter;
+        }
+        else
+        {
+            json[NameOfDiscipline] = discipline;
+        }
+
+    }
+    return json;
 }

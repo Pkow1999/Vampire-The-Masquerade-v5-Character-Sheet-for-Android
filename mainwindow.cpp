@@ -8,9 +8,10 @@
 #include <QScrollBar>
 #include <QLabel>
 #include <QCheckBox>
+#include <QFile>
+#include <QJsonDocument>
 
-
-
+#include <QStandardPaths>
 
 int MainWindow::counter = 0;
 int MainWindow::hunger = 0;
@@ -99,23 +100,23 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 //    }
     if(event->type() == QEvent::TouchBegin)
     {
-        qDebug() << "Touch begin";
+        //qDebug() << "Touch begin";
         touchBegin = static_cast<QTouchEvent *>(event)->clone();
     }
     else if(event->type() == QEvent::TouchEnd)
     {
-        qDebug() << "Touch begin";
+        //qDebug() << "Touch begin";
         touchEnd = static_cast<QTouchEvent *>(event)->clone();
     }
     if(touchBegin != nullptr && touchEnd != nullptr)
     {
-        qDebug() << "=======Touch Begin=======";
-        qDebug() << "X: " << touchBegin->points().first().position().x() << "   Y: " << touchBegin->points().first().position().y();
-        qDebug() << "TimeStamp: " << touchBegin->timestamp();
+        //qDebug() << "=======Touch Begin=======";
+        //qDebug() << "X: " << touchBegin->points().first().position().x() << "   Y: " << touchBegin->points().first().position().y();
+        //qDebug() << "TimeStamp: " << touchBegin->timestamp();
 
-        qDebug() << "=======Touch End=======";
-        qDebug() << "X: " << touchEnd->points().first().position().x() << "   Y: " << touchEnd->points().first().position().y();
-        qDebug() << "TimeStamp: " << touchEnd->timestamp();
+        //qDebug() << "=======Touch End=======";
+        //qDebug() << "X: " << touchEnd->points().first().position().x() << "   Y: " << touchEnd->points().first().position().y();
+        //qDebug() << "TimeStamp: " << touchEnd->timestamp();
 
         return swipeAction(touchBegin, touchEnd);
     }
@@ -275,6 +276,36 @@ void MainWindow::on_clanSymbolToggler_toggled(bool checked)
     {
         clearBackground();
     }
+    QJsonObject jsondiscp = disciplineWindow->write();
+    //qDebug() << jsondiscp;
+    QJsonObject jsonatr = attributesWindow->write();
+    //qDebug() << jsonatr;
+    QJsonObject jsonPhys = physicalSkillsWindow->write();
+    QJsonObject jsonMent = mentalSkillsWindow->write();
+    QJsonObject jsonSoc = socialSkillsWindow->write();
+    QJsonObject jsonInd = indicatorsWindow->write();
+    QJsonObject jsonLore = loresheetsWindow->write();
+    QJsonObject jsonPersonal = personalWindow->write();
+//    qDebug() << "ALL:";
+    QJsonObject json;
+    json["Attributes"] = jsonatr;
+    json["Disciplines"] = jsondiscp;
+    json["Physical Skills"] = jsonPhys;
+    json["Social Skills"] = jsonSoc;
+    json["Mental Skills"] = jsonMent;
+    json["Indicators"] = jsonInd;
+    json["Loresheets"] = jsonLore;
+    json["Personal Data"] = jsonPersonal;
+
+    auto path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    auto directory= path + "/saves/";
+    auto fileName = "Francis.sav";
+    QFile saveFile(directory + fileName);
+    saveFile.write(QJsonDocument(json).toJson());
+    saveFile.close();
+//    qDebug() << json;
+
+
 }
 
 void MainWindow::generatePages()
@@ -491,3 +522,4 @@ void MainWindow::dynamicRemoveDots(QAbstractButton *bt)//naprawienie sposobem ta
         }
     }
 }
+

@@ -2,6 +2,7 @@
 #include "ui_indicators.h"
 
 #include <QCheckBox>
+#include <QJsonArray>
 #include "mainwindow.h"
 
 
@@ -117,7 +118,7 @@ void Indicators::deleteWP(int size_)
     }
 }
 
-QPair<int, int> Indicators::countIndicators(QLayout *layout,int size_)
+QPair<int, int> Indicators::countIndicators(QLayout *layout,int size_) const
 {
     int superficial = 0;
     int agravated = 0;
@@ -244,3 +245,24 @@ void Indicators::dynamicRemoveDots(QAbstractButton *bt)
     MainWindow::hunger = MainWindow::countDots(bt->group());
 }
 
+QJsonObject Indicators::write()
+{
+    QJsonObject json;
+    json["hunger"] = MainWindow::countDots(ui->hungerGroup);
+
+    QJsonObject healthDetails;
+    healthDetails["modifier"] = ui->healthModifier->value();
+    healthDetails["superficial"] = countIndicators(ui->Health, MainWindow::healthPool).first;
+    healthDetails["agravated"] = countIndicators(ui->Health, MainWindow::healthPool).second;
+    json["health"] = healthDetails;
+
+
+    QJsonObject willpowerDetails;
+    willpowerDetails["modifier"] = ui->wpModifier->value();
+    willpowerDetails["superficial"] = countIndicators(ui->Willpower, MainWindow::willpowerPool).first;
+    willpowerDetails["agravated"] = countIndicators(ui->Willpower, MainWindow::willpowerPool).second;
+    json["willpower"] = willpowerDetails;
+
+    json["humanity"] = countIndicators(ui->Humanity,10).second;
+    return json;
+}

@@ -16,6 +16,7 @@ public:
     explicit Disciplines(QWidget *parent = nullptr);
     ~Disciplines();
 
+    QJsonObject write() const;
 private slots:
     void dynamicRemoveDots(QAbstractButton *bt);
     void dynamicPowersCreation(QAbstractButton *bt);
@@ -26,7 +27,7 @@ private slots:
     void on_lockButton_toggled(bool checked);
 
     void lineEditHandling();
-    void callBoldingFromParent(QAbstractButton *bt, bool state);
+    void callBoldingFromParent(QAbstractButton *bt, const bool &state);
 
 private:
     Ui::Disciplines *ui;

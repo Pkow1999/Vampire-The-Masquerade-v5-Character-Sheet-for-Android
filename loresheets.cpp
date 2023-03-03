@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QButtonGroup>
+#include <QJsonArray>
 
 Loresheets::Loresheets(QWidget *parent) :
     QWidget(parent),
@@ -18,6 +19,7 @@ Loresheets::Loresheets(QWidget *parent) :
     connect(ui->loresheetsButtonGroup, &QButtonGroup::buttonClicked, this, &Loresheets::dynamicRemoveDots);
 
     connect(ui->loresheetLine, &QLineEdit::editingFinished, this, &Loresheets::lineEditHandling);
+    listOfLoresheets.append(ui->Loresheet1);
 
 }
 
@@ -99,7 +101,7 @@ void Loresheets::on_addNewWidgetButton_clicked()
 
 void Loresheets::on_deleteWidgetButton_clicked()
 {
-    if(!listOfLoresheets.isEmpty())
+    if(listOfLoresheets.count() > 1)
     {
         listOfLoresheets.back()->deleteLater();
         listOfLoresheets.pop_back();
@@ -141,4 +143,30 @@ void Loresheets::lineEditHandling()
 {
     QLineEdit *line = static_cast<QLineEdit *>(sender());
     line->clearFocus();
+}
+
+QJsonObject Loresheets::write() const
+{
+    QJsonObject json;
+    int counter = 1;
+    for(auto widgetOfLoresheet : listOfLoresheets)
+    {
+        QLineEdit *lineEdit = widgetOfLoresheet->findChild<QLineEdit *>();
+        QString const NameOfLoresheet = lineEdit->text();
+        QJsonObject loresheet;
+        QLayout *layoutButton = MainWindow::findParentLayout(lineEdit)->itemAt(1)->layout();
+        QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
+        loresheet["dots"] = MainWindow::countDots(but->group());
+        loresheet["content"] = widgetOfLoresheet->findChild<QTextEdit *>()->toPlainText();
+        if(json.contains(NameOfLoresheet))
+        {
+            json[NameOfLoresheet + QString::number(counter)] = loresheet;
+            ++counter;
+        }
+        else
+        {
+            json[NameOfLoresheet] = loresheet;
+        }
+    }
+    return json;
 }

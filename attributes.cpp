@@ -4,8 +4,8 @@
 #include <QScroller>
 #include <QScreen>
 #include <QLineEdit>
+#include <QJsonArray>
 #include "mainwindow.h"
-
 Attributes::Attributes(QWidget *parent, Indicators *anotherWindowPointer) :
     QWidget(parent),
     ui(new Ui::Attributes)
@@ -33,6 +33,8 @@ void Attributes::setIndicatorsPointer(Indicators *ind)
     connect(ui->Composure, &QButtonGroup::buttonClicked,indicatorsPointer,&Indicators::createWillpower);
     connect(ui->Stamina, &QButtonGroup::buttonClicked,indicatorsPointer,&Indicators::createHealth);
 }
+
+
 
 Attributes::~Attributes()
 {
@@ -114,3 +116,15 @@ void Attributes::on_lockButton_toggled(bool checked)
     }
 }
 
+QJsonObject Attributes::write() const
+{
+    QList<QCheckBox *> listOfAttributes = this->findChildren<QCheckBox *>();
+    QJsonObject json;
+    for(auto checkbox : listOfAttributes)
+    {
+        QLayout *layoutButton = MainWindow::findParentLayout(checkbox)->itemAt(1)->layout();
+        QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
+        json[checkbox->text()] = MainWindow::countDots(but->group());
+    }
+    return json;
+}

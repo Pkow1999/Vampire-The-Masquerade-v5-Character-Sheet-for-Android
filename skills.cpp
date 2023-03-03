@@ -119,3 +119,21 @@ void Skills::callBoldingFromParent(QAbstractButton *bt, bool state)
         w->bolding(bt, state, 2, 1);
 }
 
+QJsonObject Skills::write() const
+{
+    QList<QCheckBox *> listOfSkills = this->findChildren<QCheckBox *>();
+    QJsonObject json;
+    for(auto checkbox : listOfSkills)
+    {
+        QJsonObject details;
+        QLayout *layoutButton = MainWindow::findParentLayout(checkbox)->itemAt(2)->layout();
+        QAbstractButton *but = static_cast<QAbstractButton *>(layoutButton->itemAt(0)->widget());
+        details["dots"] = MainWindow::countDots(but->group());
+
+        QLineEdit *lineEdit = static_cast<QLineEdit *>(MainWindow::findParentLayout(checkbox)->itemAt(1)->widget());
+        details["specializations"] = lineEdit->text();
+
+        json[checkbox->text()] = details;
+    }
+    return json;
+}

@@ -15,6 +15,7 @@ class Loresheets : public QWidget
 public:
     explicit Loresheets(QWidget *parent = nullptr);
     ~Loresheets();
+    QJsonObject write() const;
 private slots:
     void dynamicRemoveDots(QAbstractButton *bt);
     void on_addNewWidgetButton_clicked();

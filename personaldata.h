@@ -21,6 +21,7 @@ public:
     QLineEdit* getClanLineEdit();
     ~PersonalData();
 
+    QJsonObject write() const;
 private slots:
     void lineEditHandling();
     void spinBoxHandling();

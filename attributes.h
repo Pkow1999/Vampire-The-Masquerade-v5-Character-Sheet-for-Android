@@ -7,6 +7,7 @@
 #include <QStyleOption>
 #include <QWidget>
 #include "indicators.h"
+#include <QJsonObject>
 
 namespace Ui {
 class Attributes;
@@ -20,6 +21,7 @@ public:
     explicit Attributes(QWidget *parent = nullptr, Indicators *anotherWindowPointer = nullptr);
     QStringList getAttributesList();
     void setIndicatorsPointer(Indicators *ind);
+    QJsonObject write() const;
     ~Attributes();
 
 private slots:
@@ -42,6 +44,7 @@ private:
         QPainter p(this);
         style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
     }
+
 };
 
 #endif // ATTRIBUTES_H
