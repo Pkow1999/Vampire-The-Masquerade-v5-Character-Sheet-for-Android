@@ -46,7 +46,8 @@ void Options::checkSaves()
         {
             for(const auto &saveName : dir.entryList(QDir::Files))
             {
-                createSaveWidget(saveName);
+                if(saveName.contains(".sav"))
+                    createSaveWidget(saveName);
             }
         }
     }

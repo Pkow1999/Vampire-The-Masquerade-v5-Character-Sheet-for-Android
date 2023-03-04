@@ -26,12 +26,14 @@ public:
     void clear();
 
     ~Attributes();
+public slots:
+    void on_lockButton_toggled(bool checked);
 
 private slots:
     void dynamicRemoveDots(QAbstractButton *bt);
     void calculateHealth();
     void calculateWP();
-    void on_lockButton_toggled(bool checked);
+    //void on_lockButton_toggled(bool checked);
     void callBoldingFromParent(QAbstractButton *bt, bool state);
 private:
     int counter = 0;

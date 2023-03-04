@@ -170,6 +170,17 @@ bool MainWindow::swipeAction(QTouchEvent *begin, QTouchEvent *end)
     return false;
 }
 
+void MainWindow::lockedData(const bool& checked)
+{
+    attributesWindow->on_lockButton_toggled(checked);
+    disciplineWindow->on_lockButton_toggled(checked);
+    indicatorsWindow->on_lockButton_toggled(checked);
+    loresheetsWindow->on_lockButton_toggled(checked);
+    physicalSkillsWindow->on_lockButton_toggled(checked);
+    socialSkillsWindow->on_lockButton_toggled(checked);
+    mentalSkillsWindow->on_lockButton_toggled(checked);
+}
+
 bool MainWindow::swipeRight()
 {
     if(!ui->listWidget->isVisible())
@@ -411,6 +422,7 @@ QJsonObject MainWindow::getSaveData()
 
 void MainWindow::readSaveData(const QJsonObject &json)
 {
+    lockedData(false);
     if(json.contains("Attributes") && json["Attributes"].isObject())
     {
         qDebug() << "JSON MA ATRYBUTY!!!";
@@ -472,6 +484,7 @@ void MainWindow::readSaveData(const QJsonObject &json)
         loresheetsWindow->clear();
         loresheetsWindow->read(json["Loresheets"].toObject());
     }
+    lockedData(true);
 }
 
 void MainWindow::bolding(QAbstractButton *bt, bool state, int index, int type)

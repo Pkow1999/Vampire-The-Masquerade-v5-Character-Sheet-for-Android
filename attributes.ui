@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>440</width>
+    <width>417</width>
     <height>645</height>
    </rect>
   </property>
@@ -122,10 +122,10 @@ height: 15px;
        <item>
         <layout class="QHBoxLayout" name="StrengthDots">
          <property name="spacing">
-          <number>20</number>
+          <number>18</number>
          </property>
          <property name="sizeConstraint">
-          <enum>QLayout::SetMinimumSize</enum>
+          <enum>QLayout::SetMaximumSize</enum>
          </property>
          <item>
           <widget class="QRadioButton" name="radioButton">
@@ -334,7 +334,7 @@ height: 15px;
        <item>
         <layout class="QHBoxLayout" name="DexterityDots">
          <property name="spacing">
-          <number>20</number>
+          <number>18</number>
          </property>
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
@@ -552,10 +552,10 @@ height: 15px;
        <item>
         <layout class="QHBoxLayout" name="StaminaDots">
          <property name="spacing">
-          <number>20</number>
+          <number>18</number>
          </property>
          <property name="sizeConstraint">
-          <enum>QLayout::SetMinimumSize</enum>
+          <enum>QLayout::SetMaximumSize</enum>
          </property>
          <item>
           <widget class="QRadioButton" name="radioButton_16">
@@ -796,7 +796,7 @@ height: 15px;
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_9">
          <property name="spacing">
-          <number>20</number>
+          <number>18</number>
          </property>
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
@@ -1008,7 +1008,7 @@ height: 15px;
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_8">
          <property name="spacing">
-          <number>20</number>
+          <number>18</number>
          </property>
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
@@ -1220,7 +1220,7 @@ height: 15px;
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_10">
          <property name="spacing">
-          <number>20</number>
+          <number>18</number>
          </property>
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
@@ -1464,7 +1464,7 @@ height: 15px;
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <property name="spacing">
-          <number>20</number>
+          <number>18</number>
          </property>
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
@@ -1676,7 +1676,7 @@ height: 15px;
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_21">
          <property name="spacing">
-          <number>20</number>
+          <number>18</number>
          </property>
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
@@ -1888,7 +1888,7 @@ height: 15px;
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_23">
          <property name="spacing">
-          <number>20</number>
+          <number>18</number>
          </property>
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
@@ -2092,42 +2092,7 @@ height: 20px;
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="Resolve">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Wits">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="AttributesGroup">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Charisma">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
   <buttongroup name="Intelligence">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Strength">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Composure">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Stamina">
    <property name="exclusive">
     <bool>false</bool>
    </property>
@@ -2137,7 +2102,42 @@ height: 20px;
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="Charisma">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Strength">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Resolve">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
   <buttongroup name="Manipulation">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Composure">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="AttributesGroup">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Wits">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Stamina">
    <property name="exclusive">
     <bool>false</bool>
    </property>

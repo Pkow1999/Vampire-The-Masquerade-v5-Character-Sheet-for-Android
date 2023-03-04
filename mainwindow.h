@@ -74,11 +74,10 @@ private:
     void generatePages();
     bool eventFilter(QObject *obj, QEvent *event);
     bool swipeAction(QTouchEvent *begin, QTouchEvent *end);
-
-
     bool swipeRight();
     bool swipeLeft();
     void changeBackground(QString backgroundURL);
     void clearBackground();
+    void lockedData(const bool &checked);
 };
 #endif // MAINWINDOW_H

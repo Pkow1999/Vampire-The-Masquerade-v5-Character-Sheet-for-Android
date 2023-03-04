@@ -21,9 +21,10 @@ public:
     QJsonObject write() const;
     void read(const QJsonObject &json);
     void clear();
-
-private slots:
+public slots:
     void on_lockButton_toggled(bool checked);
+private slots:
+    //void on_lockButton_toggled(bool checked);
 private:
     void dynamicRemoveDots(QAbstractButton *bt);
     void lineEditHandling();

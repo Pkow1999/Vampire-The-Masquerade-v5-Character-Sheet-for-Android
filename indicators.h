@@ -20,10 +20,11 @@ public:
     int getHumanity();
     int getWillpower();
 public slots:
+    void on_lockButton_toggled(bool checked);
     void createWillpower();
     void createHealth();
 private slots:
-    void on_lockButton_toggled(bool checked);
+    //void on_lockButton_toggled(bool checked);
 
     void dynamicRemoveDots(QAbstractButton *bt);
 private:
