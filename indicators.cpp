@@ -351,3 +351,15 @@ void Indicators::read(const QJsonObject &json)
 
     }
 }
+
+int Indicators::getHumanity()
+{
+    return countIndicators(ui->Humanity, 10).second;
+}
+
+int Indicators::getWillpower()
+{
+    int superficial = countIndicators(ui->Willpower, MainWindow::willpowerPool).first;
+    int agravated = countIndicators(ui->Willpower, MainWindow::willpowerPool).second;
+    return MainWindow::willpowerPool - superficial - agravated;
+}

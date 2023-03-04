@@ -20,13 +20,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#Attributes{
-	background-image: url(:/images/Ventrue_transparent_small.png);
-	background-position: center;
-	background-repeat: no-repeat;
-    background-origin: content;
-    background-clip: padding;
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -44,7 +38,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="resources.qrc">
        <normaloff>:/images/icons/unlock20x20.png</normaloff>:/images/icons/unlock20x20.png</iconset>
      </property>
      <property name="iconSize">
@@ -2093,45 +2087,17 @@ height: 20px;
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="Manipulation">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Strength">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Intelligence">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
   <buttongroup name="Resolve">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="Composure">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Dexterity">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
   <buttongroup name="Wits">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Stamina">
    <property name="exclusive">
     <bool>false</bool>
    </property>
@@ -2142,6 +2108,36 @@ height: 20px;
    </property>
   </buttongroup>
   <buttongroup name="Charisma">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Intelligence">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Strength">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Composure">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Stamina">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Dexterity">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Manipulation">
    <property name="exclusive">
     <bool>false</bool>
    </property>

@@ -17,6 +17,8 @@ public:
     QJsonObject write();
     void clear();
     void read(const QJsonObject& json);
+    int getHumanity();
+    int getWillpower();
 public slots:
     void createWillpower();
     void createHealth();

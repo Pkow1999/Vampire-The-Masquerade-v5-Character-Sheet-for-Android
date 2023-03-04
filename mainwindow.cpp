@@ -119,6 +119,16 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 
         return swipeAction(touchBegin, touchEnd);
     }
+    if(event->type() == QEvent::KeyPress)
+    {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        if(keyEvent->key() == Qt::Key_Back)
+        {
+            ui->drawerButton->click();
+            return true;
+        }
+
+    }
     return false;
 }
 
@@ -294,15 +304,17 @@ void MainWindow::generatePages()
     attributesWindow = new Attributes(this);
     attributesWindow->setObjectName("Attributes");
 
-    diceWindow = new DiceRoller(this, attributesWindow->getAttributesList(), allSkills);
+
+    indicatorsWindow = new Indicators(this);
+    indicatorsWindow->setObjectName("Indicators");
+    attributesWindow->setIndicatorsPointer(indicatorsWindow);
+
+    diceWindow = new DiceRoller(this, attributesWindow->getAttributesList(), allSkills, indicatorsWindow);
     diceWindow->setObjectName("Dice Roller");
 
     personalWindow = new PersonalData(this);
     personalWindow->setObjectName("Personal Data");
 
-    indicatorsWindow = new Indicators(this);
-    indicatorsWindow->setObjectName("Indicators");
-    attributesWindow->setIndicatorsPointer(indicatorsWindow);
 
     disciplineWindow = new Disciplines(this);
     disciplineWindow->setObjectName("Disciplines");
