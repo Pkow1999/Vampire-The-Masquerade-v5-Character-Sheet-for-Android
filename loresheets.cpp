@@ -184,6 +184,7 @@ void Loresheets::read(const QJsonObject &json)
         qDebug() << "Lecimy po kejach" << key;
         QLineEdit *lineEdit = listOfLoresheets.at(counter)->findChild<QLineEdit *>();
         lineEdit->setText(key);
+        lineEdit->setCursorPosition(0);
         QJsonObject details = json[key].toObject();
         if(details.contains("dots") && details["dots"].isString())
         {

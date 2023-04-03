@@ -15,6 +15,7 @@
 #include "disciplines.h"
 #include "loresheets.h"
 #include "skills.h"
+#include "advantagesanddisadvantages.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -65,6 +66,7 @@ private:
     Indicators *indicatorsWindow;
     Disciplines *disciplineWindow;
     Loresheets *loresheetsWindow;
+    AdvantagesAndDisadvantages *meritsAndFlawsWindow;
     Skills *physicalSkillsWindow;
     Skills *socialSkillsWindow;
     Skills *mentalSkillsWindow;

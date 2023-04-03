@@ -176,6 +176,7 @@ void Skills::read(const QJsonObject &json)
                 specialization = details["specializations"].toString();
                 QLineEdit *lineEdit = static_cast<QLineEdit *>(MainWindow::findParentLayout(checkbox)->itemAt(1)->widget());
                 lineEdit->setText(specialization);
+                lineEdit->setCursorPosition(0);
             }
             qDebug() <<"SKILL: " << checkbox->text() << " DOTS: " << dots << " Specialization: " << specialization;
 

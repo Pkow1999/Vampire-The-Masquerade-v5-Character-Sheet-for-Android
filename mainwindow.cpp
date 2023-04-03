@@ -179,6 +179,7 @@ void MainWindow::lockedData(const bool& checked)
     physicalSkillsWindow->on_lockButton_toggled(checked);
     socialSkillsWindow->on_lockButton_toggled(checked);
     mentalSkillsWindow->on_lockButton_toggled(checked);
+    meritsAndFlawsWindow->on_lockButton_toggled(checked);
 }
 
 bool MainWindow::swipeRight()
@@ -239,7 +240,7 @@ void MainWindow::on_listWidget_currentItemChanged(QListWidgetItem *current, QLis
                 widgetStack->setCurrentWidget(widgetStack->widget(i));
                 qDebug() << "~~~~~~WIDGET STACK SIZE POLICY~~~~~~~~";
                 qDebug() << widgetStack->sizePolicy();
-                if(widgetStack->widget(i)->objectName() ==  "Disciplines" || widgetStack->widget(i)->objectName() ==  "Loresheets")
+                if(widgetStack->widget(i)->objectName() ==  "Disciplines" || widgetStack->widget(i)->objectName() ==  "Loresheets" || widgetStack->widget(i)->objectName() == "Merits and Flaws")
                 {
                     widgetStack->setMaximumHeight(ui->scrollArea->viewport()->maximumHeight());//making scrollable possible
                 }
@@ -333,6 +334,9 @@ void MainWindow::generatePages()
     loresheetsWindow = new Loresheets(this);
     loresheetsWindow->setObjectName("Loresheets");
 
+    meritsAndFlawsWindow = new AdvantagesAndDisadvantages(this);
+    meritsAndFlawsWindow->setObjectName("Merits and Flaws");
+
     physicalSkillsWindow = new Skills(this, physicalSkills);
     physicalSkillsWindow->setObjectName("Physical Skills");
 
@@ -352,6 +356,7 @@ void MainWindow::generatePages()
     widgetStack->addWidget(indicatorsWindow);
     widgetStack->addWidget(disciplineWindow);
     widgetStack->addWidget(loresheetsWindow);
+    widgetStack->addWidget(meritsAndFlawsWindow);
     widgetStack->addWidget(physicalSkillsWindow);
     widgetStack->addWidget(socialSkillsWindow);
     widgetStack->addWidget(mentalSkillsWindow);
@@ -407,6 +412,7 @@ QJsonObject MainWindow::getSaveData()
     QJsonObject jsonInd = indicatorsWindow->write();
     QJsonObject jsonLore = loresheetsWindow->write();
     QJsonObject jsonPersonal = personalWindow->write();
+    QJsonObject jsonMeritsAndFlaws = meritsAndFlawsWindow->write();
 
     Mainjson["Attributes"] = jsonatr;
     Mainjson["Disciplines"] = jsondiscp;
@@ -416,6 +422,7 @@ QJsonObject MainWindow::getSaveData()
     Mainjson["Indicators"] = jsonInd;
     Mainjson["Loresheets"] = jsonLore;
     Mainjson["Personal Data"] = jsonPersonal;
+    Mainjson["Merits and Flaws"] = jsonMeritsAndFlaws;
     qDebug() << Mainjson;
     return Mainjson;
 }
@@ -483,6 +490,13 @@ void MainWindow::readSaveData(const QJsonObject &json)
         qDebug() <<json["Loresheets"];
         loresheetsWindow->clear();
         loresheetsWindow->read(json["Loresheets"].toObject());
+    }
+    if(json.contains("Merits and Flaws") && json["Merits and Flaws"].isObject())
+    {
+        qDebug() << "Json ma Merits and Flaws";
+        qDebug() <<json["Merits and Flaws"];
+        meritsAndFlawsWindow->clear();
+        meritsAndFlawsWindow->read(json["Merits and Flaws"].toObject());
     }
     lockedData(true);
 }

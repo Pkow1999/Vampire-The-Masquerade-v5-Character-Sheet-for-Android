@@ -43,6 +43,9 @@ set(PROJECT_SOURCES
         options.h
         options.cpp
         options.ui
+        advantagesanddisadvantages.h
+        advantagesanddisadvantages.cpp
+        advantagesanddisadvantages.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

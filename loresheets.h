@@ -26,8 +26,6 @@ private slots:
 
     void on_deleteWidgetButton_clicked();
 
-    //void on_lockButton_toggled(bool checked);
-
     void lineEditHandling();
 private:
     Ui::Loresheets *ui;

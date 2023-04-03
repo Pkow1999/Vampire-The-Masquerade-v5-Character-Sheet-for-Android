@@ -151,11 +151,15 @@ void PersonalData::read(const QJsonObject &json)
     {
         QLayout *layout = MainWindow::findParentLayout(label);
         QLineEdit * valueText = static_cast<QLineEdit *>(layout->itemAt(1)->widget());
+
         if(json.contains(label->text()) && json[label->text()].isString())
         {
             QLineEdit * valueText = static_cast<QLineEdit *>(layout->itemAt(1)->widget());
             valueText->setText(json[label->text()].toString());
+            valueText->setCursorPosition(0);
+
         }
+
     }
     if(json.contains(ui->currentExp->text()) && json[ui->currentExp->text()].isString())
     {
