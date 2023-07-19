@@ -102,6 +102,8 @@ void Skills::on_lockButton_toggled(bool checked)
     {
         but->setEnabled(!checked);
     }
+    ui->lockButton->setChecked(checked);
+
 }
 
 

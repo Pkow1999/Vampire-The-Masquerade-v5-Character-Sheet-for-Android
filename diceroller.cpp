@@ -22,6 +22,12 @@ DiceRoller::DiceRoller(QWidget *parent, const QStringList &listOfAttributes, con
     ui->attributeComboBox->addItems(listOfAttributes);
     ui->skillComboBox->addItems(listOfSkills);
     connect(ui->diceModifier, &QSpinBox::editingFinished, this, &DiceRoller::spinBoxHandling);
+
+    //Depraceted, at least for now
+    ui->label->setVisible(false);
+    ui->label_2->setVisible(false);
+    ui->attributeComboBox->setVisible(false);
+    ui->skillComboBox->setVisible(false);
 }
 
 void DiceRoller::refreshText()//updateInfo
@@ -48,9 +54,9 @@ void DiceRoller::on_pushButton_clicked()//updateInfo Slot
 
 void DiceRoller::deleteDices(int size_)
 {
-    for(int i = 0; i < size_; i++)
+    for(uint8_t i = 0; i < size_; i++)
     {
-        for(int j = 0; j < 2; j++)
+        for(uint8_t j = 0; j < 2; j++)
         {
             ui->Rolls->itemAt(i)->layout()->itemAt(j)->widget()->deleteLater();
         }
@@ -75,14 +81,14 @@ void DiceRoller::on_rollButton_clicked()
 
 void DiceRoller::createDices(int size_)
 {
-    for(int i = 0; i < size_; i++)
+    for(uint8_t i = 0; i < size_; i++)
     {
         QCheckBox *dynCheck = new QCheckBox(this);
         dynCheck->setStyleSheet("QCheckBox::indicator{width: 15px;height: 15px;}");
         dynCheck->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         QVBoxLayout *dynLayout = new QVBoxLayout();
         dynLayout->setSizeConstraint(QLayout::SetFixedSize);
-        int generatedNumber = QRandomGenerator::system()->bounded(10) + 1;
+        uint8_t generatedNumber = QRandomGenerator::system()->bounded(10) + 1;
         QLabel *dynLabel = new QLabel(this);
         dynLabel->setAlignment(Qt::AlignCenter);
         dynLabel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -105,7 +111,7 @@ void DiceRoller::createDices(int size_)
 
 void DiceRoller::deleteFrenzyRouseDices(int size_)
 {
-    for(int i = 0; i < size_; i++)
+    for(uint8_t i = 0; i < size_; i++)
     {
         ui->rouseFrenzyRolls->itemAt(i)->widget()->deleteLater();
     }
@@ -114,12 +120,12 @@ void DiceRoller::deleteFrenzyRouseDices(int size_)
 
 void DiceRoller::on_rerollButton_clicked()
 {
-    for(int i = 0; i < MainWindow::counter; i++)
+    for(uint8_t i = 0; i < MainWindow::counter; i++)
     {
         QAbstractButton *bt = qobject_cast<QAbstractButton *>(ui->Rolls->itemAt(i)->layout()->itemAt(1)->widget());
         if(bt->isChecked())
         {
-            int generatedNumber = QRandomGenerator::system()->bounded(10) + 1;
+            uint8_t generatedNumber = QRandomGenerator::system()->bounded(10) + 1;
             {
                 QLabel *lb = qobject_cast<QLabel *>(ui->Rolls->itemAt(i)->layout()->itemAt(0)->widget());
                 lb->setText(QString::number(generatedNumber));
@@ -147,9 +153,9 @@ void DiceRoller::on_frenzyRollButton_clicked()
     if(indicatorPoint != nullptr)
     {
         lastFrenzyDiceRoll = indicatorPoint->getWillpower() + indicatorPoint->getHumanity()/3;
-        for(int i = 0; i < lastFrenzyDiceRoll; i++)
+        for(uint8_t i = 0; i < lastFrenzyDiceRoll; i++)
         {
-            int generatedNumber = QRandomGenerator::system()->bounded(10) + 1;
+            uint8_t generatedNumber = QRandomGenerator::system()->bounded(10) + 1;
             QLabel *dynLabel = new QLabel(this);
             dynLabel->setAlignment(Qt::AlignCenter);
             dynLabel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -166,20 +172,15 @@ void DiceRoller::on_rouseRollButton_clicked()
 {
     deleteFrenzyRouseDices(lastFrenzyDiceRoll);
     lastFrenzyDiceRoll = 1;
-    int generatedNumber = QRandomGenerator::system()->bounded(10) + 1;
+    uint8_t generatedNumber = QRandomGenerator::system()->bounded(10) + 1;
     QLabel *dynLabel = new QLabel(this);
     dynLabel->setAlignment(Qt::AlignCenter);
     dynLabel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     dynLabel->setStyleSheet("QLabel { font-size : 20px;}");
-    if(generatedNumber%2 == 0){
-        dynLabel->setText("Success");
-    }
-    else
-    {
+    if(generatedNumber < 6){
         dynLabel->setStyleSheet("QLabel { color : red; font-size : 20px;}");
-        dynLabel->setText("Failed");
-
     }
+    dynLabel->setText(QString::number(generatedNumber));
     ui->rouseFrenzyRolls->addWidget(dynLabel);
 }
 

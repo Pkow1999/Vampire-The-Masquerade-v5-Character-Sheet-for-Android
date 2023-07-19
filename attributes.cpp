@@ -112,8 +112,8 @@ void Attributes::on_lockButton_toggled(bool checked)
         {
             but->setEnabled(true);
         }
-
     }
+    ui->lockButton->setChecked(checked);
 }
 void Attributes::clear()
 {

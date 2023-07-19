@@ -46,6 +46,9 @@ set(PROJECT_SOURCES
         advantagesanddisadvantages.h
         advantagesanddisadvantages.cpp
         advantagesanddisadvantages.ui
+        clans.h
+        clans.cpp
+        clans.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

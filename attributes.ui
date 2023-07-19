@@ -50,6 +50,12 @@
      <property name="checkable">
       <bool>true</bool>
      </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
      <property name="flat">
       <bool>true</bool>
      </property>
@@ -2092,17 +2098,12 @@ height: 20px;
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="Intelligence">
+  <buttongroup name="Composure">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
   <buttongroup name="Dexterity">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Charisma">
    <property name="exclusive">
     <bool>false</bool>
    </property>
@@ -2117,17 +2118,12 @@ height: 20px;
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="Charisma">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
   <buttongroup name="Manipulation">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="Composure">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="AttributesGroup">
    <property name="exclusive">
     <bool>false</bool>
    </property>
@@ -2138,6 +2134,16 @@ height: 20px;
    </property>
   </buttongroup>
   <buttongroup name="Stamina">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="Intelligence">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="AttributesGroup">
    <property name="exclusive">
     <bool>false</bool>
    </property>

@@ -346,8 +346,13 @@ void MainWindow::generatePages()
     mentalSkillsWindow = new Skills(this, mentalSkills);
     mentalSkillsWindow->setObjectName("Mental Skills");
 
+    clanWindow = new Clans(this);
+    clanWindow->setObjectName("Clans");
+
     optionsWindow = new Options(this);
     optionsWindow->setObjectName("Options");
+
+
 
     widgetStack = new QStackedWidget;
     widgetStack->addWidget(attributesWindow);
@@ -360,6 +365,7 @@ void MainWindow::generatePages()
     widgetStack->addWidget(physicalSkillsWindow);
     widgetStack->addWidget(socialSkillsWindow);
     widgetStack->addWidget(mentalSkillsWindow);
+    widgetStack->addWidget(clanWindow);
     widgetStack->addWidget(optionsWindow);
 
     for(int i = 0; i < widgetStack->count(); ++i)

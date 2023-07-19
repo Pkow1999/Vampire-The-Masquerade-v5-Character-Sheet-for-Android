@@ -62,6 +62,9 @@ void AdvantagesAndDisadvantages::on_lockButton_toggled(bool checked)
     //Flaws
     ui->addNewWidgetButton_2->setEnabled(!checked);
     ui->deleteWidgetButton_2->setEnabled(!checked);
+
+    ui->lockButton->setChecked(checked);
+
 }
 
 

@@ -282,7 +282,7 @@ height: 20px;
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>30</height>
+             <height>40</height>
             </size>
            </property>
           </widget>
@@ -555,7 +555,7 @@ height: 20px;
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>30</height>
+             <height>40</height>
             </size>
            </property>
           </widget>
@@ -618,12 +618,12 @@ height: 20px;
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="MeritButtonGroup1">
+  <buttongroup name="FlawButtonGroup1">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="FlawButtonGroup1">
+  <buttongroup name="MeritButtonGroup1">
    <property name="exclusive">
     <bool>false</bool>
    </property>

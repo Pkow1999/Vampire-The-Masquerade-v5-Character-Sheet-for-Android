@@ -169,6 +169,7 @@ void Disciplines::on_lockButton_toggled(bool checked)
     }
     ui->addNewWidgetButton->setEnabled(!checked);
     ui->deleteWidgetButton->setEnabled(!checked);
+    ui->lockButton->setChecked(checked);
 }
 
 void Disciplines::lineEditHandling()

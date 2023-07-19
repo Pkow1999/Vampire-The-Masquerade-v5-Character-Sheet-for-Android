@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "options.h"
 #include "ui_options.h"
-
+#include <QMessageBox>
 
 
 Options::Options(QWidget *parent) :
@@ -149,6 +149,10 @@ void Options::on_loadSaveButton_clicked()
                 w->readSaveData(json);
             }
             saveFile.close();
+            QMessageBox::information(
+                this,
+                tr("Load Complete"),
+                tr("Character has been loaded successfully!"));
             return;
         }
     }

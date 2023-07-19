@@ -16,6 +16,7 @@
 #include "loresheets.h"
 #include "skills.h"
 #include "advantagesanddisadvantages.h"
+#include "clans.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -71,6 +72,7 @@ private:
     Skills *socialSkillsWindow;
     Skills *mentalSkillsWindow;
     Options *optionsWindow;
+    Clans *clanWindow;
     QStackedWidget *widgetStack;
 
     void generatePages();

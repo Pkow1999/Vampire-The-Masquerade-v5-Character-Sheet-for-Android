@@ -237,6 +237,7 @@ void Indicators::on_lockButton_toggled(bool checked)
             spin->setEnabled(true);
         }
     }
+    ui->lockButton->setChecked(checked);
 }
 
 void Indicators::dynamicRemoveDots(QAbstractButton *bt)

@@ -39,5 +39,24 @@
         <file>images/icons/lock20x20.png</file>
         <file>images/icons/unlock20x20.png</file>
         <file>images/background-image/salubri_background_transparent.png</file>
+        <file>images/clans/Banu Haqim.png</file>
+        <file>images/clans/Brujah.png</file>
+        <file>images/clans/Gangrel.png</file>
+        <file>images/clans/Hecata.png</file>
+        <file>images/clans/Lasombra.png</file>
+        <file>images/clans/Malkavian.png</file>
+        <file>images/clans/Nosferatu.png</file>
+        <file>images/clans/Ravnos.png</file>
+        <file>images/clans/Tzimisce.png</file>
+        <file>images/clans/Thin-Blood.png</file>
+        <file>images/clans/Salubri.png</file>
+        <file>images/icons/drawer.png</file>
+        <file>images/background-image/caitiff_background_transparent.png</file>
+        <file>images/background-image/thin-blood_background_transparent.png</file>
+        <file>images/clans/Caitiff.png</file>
+        <file>images/clans/Ministry.png</file>
+        <file>images/clans/Toreador.png</file>
+        <file>images/clans/Tremere.png</file>
+        <file>images/clans/Ventrue.png</file>
     </qresource>
 </RCC>
