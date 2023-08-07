@@ -1,13 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>images/icons/Vampire5thAnkhSMOL.png</file>
-        <file>images/dice-values/bestial-fail.png</file>
-        <file>images/dice-values/normal-crit.png</file>
-        <file>images/dice-values/normal-fail.png</file>
-        <file>images/dice-values/normal-success.png</file>
-        <file>images/dice-values/red-crit.png</file>
-        <file>images/dice-values/red-fail.png</file>
-        <file>images/dice-values/red-success.png</file>
         <file>images/icons/Vampire5thAnkh.png</file>
         <file>images/checkbox/20x20/checkbox_checked.png</file>
         <file>images/checkbox/20x20/checkbox_checked_hover.png</file>
@@ -50,7 +43,6 @@
         <file>images/clans/Tzimisce.png</file>
         <file>images/clans/Thin-Blood.png</file>
         <file>images/clans/Salubri.png</file>
-        <file>images/icons/drawer.png</file>
         <file>images/background-image/caitiff_background_transparent.png</file>
         <file>images/background-image/thin-blood_background_transparent.png</file>
         <file>images/clans/Caitiff.png</file>
@@ -58,5 +50,6 @@
         <file>images/clans/Toreador.png</file>
         <file>images/clans/Tremere.png</file>
         <file>images/clans/Ventrue.png</file>
+        <file>images/icons/drawer.png</file>
     </qresource>
 </RCC>

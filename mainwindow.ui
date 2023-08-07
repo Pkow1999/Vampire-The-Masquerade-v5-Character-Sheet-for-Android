@@ -224,6 +224,9 @@
       <property name="defaultDropAction">
        <enum>Qt::IgnoreAction</enum>
       </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
       <property name="movement">
        <enum>QListView::Static</enum>
       </property>

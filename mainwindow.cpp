@@ -356,15 +356,15 @@ void MainWindow::generatePages()
 
     widgetStack = new QStackedWidget;
     widgetStack->addWidget(attributesWindow);
-    widgetStack->addWidget(diceWindow);
-    widgetStack->addWidget(personalWindow);
-    widgetStack->addWidget(indicatorsWindow);
-    widgetStack->addWidget(disciplineWindow);
-    widgetStack->addWidget(loresheetsWindow);
-    widgetStack->addWidget(meritsAndFlawsWindow);
     widgetStack->addWidget(physicalSkillsWindow);
     widgetStack->addWidget(socialSkillsWindow);
     widgetStack->addWidget(mentalSkillsWindow);
+    widgetStack->addWidget(disciplineWindow);
+    widgetStack->addWidget(diceWindow);
+    widgetStack->addWidget(personalWindow);
+    widgetStack->addWidget(indicatorsWindow);
+    widgetStack->addWidget(loresheetsWindow);
+    widgetStack->addWidget(meritsAndFlawsWindow);
     widgetStack->addWidget(clanWindow);
     widgetStack->addWidget(optionsWindow);
 

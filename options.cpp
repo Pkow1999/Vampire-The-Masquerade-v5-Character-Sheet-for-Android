@@ -152,7 +152,9 @@ void Options::on_loadSaveButton_clicked()
             QMessageBox::information(
                 this,
                 tr("Load Complete"),
-                tr("Character has been loaded successfully!"));
+                tr("Character has been loaded successfully!"),
+                QMessageBox::StandardButton::Ok,
+                QMessageBox::StandardButton::Ok);
             return;
         }
     }
