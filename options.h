@@ -35,7 +35,7 @@ private:
     QButtonGroup *loadSaveButtonGroup;
     QButtonGroup *deleteSaveButtonGroup;
     void checkSaves();
-    QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     QDir dir = QDir(path);
 };
 
