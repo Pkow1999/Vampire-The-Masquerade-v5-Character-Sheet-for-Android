@@ -2,7 +2,7 @@
 
 ## An interactive character sheet for Vampire The Masquerade Fith Edition, available in English
 
-<img src="https://github.com/Pkow1999/vtm_sheet_androidPort/assets/72875240/76d5d085-76b9-430c-b68f-21b596ded95d" width="500" />
+<img src="https://github.com/Pkow1999/vtm_sheet_androidPort/assets/72875240/c78355b2-d3cb-465d-8127-76c16169c549" width="500" />
 
 <img src="https://github.com/Pkow1999/vtm_sheet_androidPort/assets/72875240/2eed5c86-0fdd-4211-ab27-2255ceb6232c" width="500" />
 
