@@ -410,8 +410,8 @@ QJsonObject MainWindow::getSaveData()
 {
     QJsonObject Mainjson;
 
-    QJsonObject jsondiscp = disciplineWindow->write();
-    QJsonObject jsonatr = attributesWindow->write();
+    QJsonObject jsonDiscp = disciplineWindow->write();
+    QJsonObject jsonAtr = attributesWindow->write();
     QJsonObject jsonPhys = physicalSkillsWindow->write();
     QJsonObject jsonMent = mentalSkillsWindow->write();
     QJsonObject jsonSoc = socialSkillsWindow->write();
@@ -420,8 +420,8 @@ QJsonObject MainWindow::getSaveData()
     QJsonObject jsonPersonal = personalWindow->write();
     QJsonObject jsonMeritsAndFlaws = meritsAndFlawsWindow->write();
 
-    Mainjson["Attributes"] = jsonatr;
-    Mainjson["Disciplines"] = jsondiscp;
+    Mainjson["Attributes"] = jsonAtr;
+    Mainjson["Disciplines"] = jsonDiscp;
     Mainjson["Physical Skills"] = jsonPhys;
     Mainjson["Social Skills"] = jsonSoc;
     Mainjson["Mental Skills"] = jsonMent;
