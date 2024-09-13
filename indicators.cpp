@@ -265,6 +265,7 @@ QJsonObject Indicators::write()
     json["willpower"] = willpowerDetails;
 
     json["humanity"] = QString::number(countIndicators(ui->Humanity,10).second);
+    json["stains"] = QString::number(countIndicators(ui->Humanity,10).first);
     return json;
 }
 
@@ -349,6 +350,19 @@ void Indicators::read(const QJsonObject &json)
             czek->setCheckState(Qt::CheckState::Checked);
         }
         qDebug() << "humanity naklikane";
+
+    }
+    if(json.contains("stains") && json["stains"].isString())
+    {
+        int stains = json["stains"].toString().toInt();
+        qDebug() << "stains znalezione";
+
+        for(int i = 0; i < stains; i++)
+        {
+            QCheckBox *czek = qobject_cast <QCheckBox * >(ui->Humanity->itemAt(9 - i)->widget());
+            czek->setCheckState(Qt::CheckState::PartiallyChecked);
+        }
+        qDebug() << "stains naklikane";
 
     }
 }
