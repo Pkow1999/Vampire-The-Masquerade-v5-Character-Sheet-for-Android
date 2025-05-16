@@ -1,6 +1,8 @@
 # Vampire the Masquerade v5 Interactive Character Sheet - Android Edition
 
-## An interactive character sheet for Vampire The Masquerade Fith Edition, available in English
+## An interactive character sheet for Vampire The Masquerade Fifth Edition, available in English
+
+You can download Application from [HERE](https://github.com/Pkow1999/Vampire-The-Masquerade-v5-Character-Sheet-for-Android/releases).
 
 <img src="https://github.com/Pkow1999/vtm_sheet_androidPort/assets/72875240/c78355b2-d3cb-465d-8127-76c16169c549" width="300" />
 
